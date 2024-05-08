@@ -281,7 +281,6 @@ async function checkCommand(element, profile, message) {
 
                 await sleep(20000)
                 await killApps()
-                await rest()
                 continue mainLoop
             }
         }
