@@ -126,19 +126,26 @@ async function checkCommand(element, profile, message) {
                             x === 0 ? '--profile-directory=Default' : `--profile-directory=Profile ${x}`
                         ]
                     };
-    
+
                     browser = await puppeteer.launch(launchOptions)
-    
+
                     const browserConnected = await browser.isConnected()
-    
+
                     if (browserConnected) {
                         isBrowser = true;
                     } else {
                         prettyConsole(chalk.red(`Try Hard To Launch Browser!, Switch Next Profile`))
                     }
                 }
-    
+
                 await checkCommand(connectBrowser, x, "connectBrowser")
+
+                await sleep(3000)
+
+                prettyConsole(chalk.green(`Profile\t:${x}`))
+
+                const page = await browser.newPage();
+                await page.setDefaultNavigationTimeout(0);
 
                 // Goto Link
                 const gotoLink = async () => {
