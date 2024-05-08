@@ -362,7 +362,7 @@ async function main() {
             // Connect Browser
             const connectBrowser = async () => {
                 let launchOptions = {
-                    headless: false,
+                    headless: true,
                     args: [
                         `--user-data-dir=${chromeUserPath}`,
                         x === 0 ? '--profile-directory=Default' : `--profile-directory=Profile ${x}`
@@ -774,7 +774,7 @@ async function main() {
             const waveWallet = true;
             if (waveWallet) {
                 const wavePage = await browser.newPage()
-                console.log(chalk.cyan(`\n<==================================[Bansos ${chalk.yellow('Wave💎')}]==================================>`))
+                console.log(chalk.cyan(`\n<==================================[Bansos ${chalk.cyan('Wave💎')}]==================================>`))
                 // Goto Link
                 const gotoLink = async () => {
                     await wavePage.goto('https://web.telegram.org/k/#@waveonsuibot', { waitUntil: ['networkidle2', 'domcontentloaded'] });
@@ -879,7 +879,7 @@ async function main() {
                     continue mainLoop
                 }
 
-                prettyConsole(chalk.green(`Balance\t:${balance} 💎Wave`))
+                prettyConsole(chalk.green(`Balance\t:${balance} ${chalk.cyan('Wave💎')}`))
 
                 let speed
 
@@ -951,7 +951,7 @@ async function main() {
                             continue mainLoop
                         }
 
-                        prettyConsole(chalk.green(`Claiming 💎Wave......`))
+                        prettyConsole(chalk.green(`Claiming ${chalk.cyan('Wave💎')}......`))
 
                         let checkClaim
 
@@ -961,14 +961,14 @@ async function main() {
                                 await iframe.waitForSelector('#section-transaction > div.block-data.h-full > div > div.overlay.relative > div > div > div > div.ml-2.flex.flex-row.items-center.item.mt-2.mb-3 > span');
                                 claimed = true;
                             } catch (error) {
-                                prettyConsole(chalk.yellow(`Still Claiming 💎Wave......`))
+                                prettyConsole(chalk.yellow(`Still Claiming ${chalk.cyan('Wave💎')}......`))
                                 checkClaim++
                             }
                         } while (checkClaim < 3 && !claimed)
 
                         // Tweaking
                         if (checkClaim === 3) {
-                            prettyConsole(chalk.yellow(`Claiming 💎Wave Failed!, Tweaking`))
+                            prettyConsole(chalk.yellow(`Claiming ${chalk.cyan('Wave💎')} Failed!, Tweaking`))
 
                             // Click Back
                             const clickBack = async () => {
@@ -997,7 +997,7 @@ async function main() {
                     } while (!claimed && reclaim < 3)
 
                     if (claimed) {
-                        prettyConsole(chalk.green("Successfully Claim 💎Wave"))
+                        prettyConsole(chalk.green(`Successfully Claim ${chalk.cyan('Wave💎')}`))
                     } else {
                         prettyConsole(chalk.red("Claiming And Tweaking Failed!"))
                     }
