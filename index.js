@@ -348,15 +348,20 @@ async function main() {
         let isVpn = false;
         let vpn, browser, isContinue, isBrowser
 
-        while (!isVpn) {
-            vpn = await checkIp();
-            if (vpn !== ip) {
-                isVpn = true;
-                prettyConsole(chalk.green(`VPN connected successfully!, IP : ${vpn}`));
+        if (x === 22) {
+            isVpn = true
+        } else {
+            while (!isVpn) {
+                vpn = await checkIp();
+                if (vpn !== ip) {
+                    isVpn = true;
+                    prettyConsole(chalk.green(`VPN connected successfully!, IP : ${vpn}`));
+                }
+    
+                await new Promise(resolve => setTimeout(resolve, 5000));
             }
-
-            await new Promise(resolve => setTimeout(resolve, 5000));
         }
+
 
         if (isVpn) {
             // Connect Browser
