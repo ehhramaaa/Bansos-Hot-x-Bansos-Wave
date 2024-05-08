@@ -360,27 +360,51 @@ async function main() {
 
         if (isVpn) {
             // Connect Browser
-            const connectBrowser = async () => {
-                let launchOptions = {
-                    headless: false,
-                    args: [
-                        `--user-data-dir=${chromeUserPath}`,
-                        x === 0 ? '--profile-directory=Default' : `--profile-directory=Profile ${x}`
-                    ]
-                };
-
-                browser = await puppeteer.launch(launchOptions)
-
-                const browserConnected = await browser.isConnected()
-
-                if (browserConnected) {
-                    isBrowser = true;
-                } else {
-                    prettyConsole(chalk.red(`Try Hard To Launch Browser!, Switch Next Profile`))
+            if (x === 22) {
+                const connectBrowser = async () => {
+                    let launchOptions = {
+                        headless: false,
+                        args: [
+                            `--user-data-dir=${chromeUserPath}`,
+                            '--profile-directory=Profile 0'
+                        ]
+                    };
+    
+                    browser = await puppeteer.launch(launchOptions)
+    
+                    const browserConnected = await browser.isConnected()
+    
+                    if (browserConnected) {
+                        isBrowser = true;
+                    } else {
+                        prettyConsole(chalk.red(`Try Hard To Launch Browser!, Switch Next Profile`))
+                    }
                 }
+    
+                await checkCommand(connectBrowser, x, "connectBrowser")
+            } else {
+                const connectBrowser = async () => {
+                    let launchOptions = {
+                        headless: false,
+                        args: [
+                            `--user-data-dir=${chromeUserPath}`,
+                            x === 0 ? '--profile-directory=Default' : `--profile-directory=Profile ${x}`
+                        ]
+                    };
+    
+                    browser = await puppeteer.launch(launchOptions)
+    
+                    const browserConnected = await browser.isConnected()
+    
+                    if (browserConnected) {
+                        isBrowser = true;
+                    } else {
+                        prettyConsole(chalk.red(`Try Hard To Launch Browser!, Switch Next Profile`))
+                    }
+                }
+    
+                await checkCommand(connectBrowser, x, "connectBrowser")
             }
-
-            await checkCommand(connectBrowser, x, "connectBrowser")
 
             await sleep(3000)
 
