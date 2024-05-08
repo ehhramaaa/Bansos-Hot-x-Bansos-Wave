@@ -346,7 +346,7 @@ async function main() {
         await new Promise(resolve => setTimeout(resolve, 5000));
 
         let isVpn = false;
-        let vpn, browser, isContinue
+        let vpn, browser, isContinue, isBrowser
 
         while (!isVpn) {
             vpn = await checkIp();
@@ -362,7 +362,7 @@ async function main() {
             // Connect Browser
             const connectBrowser = async () => {
                 let launchOptions = {
-                    headless: true,
+                    headless: false,
                     args: [
                         `--user-data-dir=${chromeUserPath}`,
                         x === 0 ? '--profile-directory=Default' : `--profile-directory=Profile ${x}`
@@ -900,7 +900,28 @@ async function main() {
                     continue mainLoop
                 }
 
-                prettyConsole(chalk.green(`Speed\t:${speed}`))
+                prettyConsole(chalk.green(`Speed\t:${speed}/Hours`))
+
+                let storage
+
+                // Check Speed
+                const checkStorage= async (x) => {
+                    await iframe.waitForSelector('#section-transaction > div.direction-tab.flex.flex-col.items-center.gap-6.pt-4 > div.menu-block > div > div.menu_2.relative > div.menu_title.flex.flex-row.justify-between.items-center.absolute > div > span.time');
+                    storage = await iframe.evaluate(() => {
+                        const element = document.querySelector('#section-transaction > div.direction-tab.flex.flex-col.items-center.gap-6.pt-4 > div.menu-block > div > div.menu_2.relative > div.menu_title.flex.flex-row.justify-between.items-center.absolute > div > span.time');
+                        return parseFloat(element.textContent)
+                    });
+                }
+
+                isContinue = await checkCommand(checkStorage, x, 'Check Speed')
+
+                if (!isContinue) {
+                    await killApps()
+                    await rest()
+                    continue mainLoop
+                }
+
+                prettyConsole(chalk.green(`Storage\t:${storage} ${chalk.cyan('Wave💎')}`))
 
                 let claim = false
 
