@@ -967,7 +967,7 @@ async function main() {
                         } while (checkClaim < 3 && !claimed)
 
                         // Tweaking
-                        if (checkClaim === 3) {
+                        if (!claimed) {
                             prettyConsole(chalk.yellow(`Claiming ${chalk.cyan('Wave💎')} Failed!, Tweaking`))
 
                             // Click Back
