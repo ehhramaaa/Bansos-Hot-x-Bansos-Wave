@@ -773,10 +773,11 @@ async function main() {
 
             const waveWallet = true;
             if (waveWallet) {
+                const wavePage = await browser.newPage()
                 console.log(chalk.cyan(`\n<==================================[Bansos ${chalk.yellow('Wave💎')}]==================================>`))
                 // Goto Link
                 const gotoLink = async () => {
-                    await page.goto('https://web.telegram.org/k/#@waveonsuibot', { waitUntil: ['networkidle2', 'domcontentloaded'] });
+                    await wavePage.goto('https://web.telegram.org/k/#@waveonsuibot', { waitUntil: ['networkidle2', 'domcontentloaded'] });
                 }
 
                 isContinue = await checkCommand(gotoLink, x, 'gotoLink')
@@ -791,9 +792,9 @@ async function main() {
 
                 // Click Open Wallet
                 const openWallet = async () => {
-                    await page.waitForSelector('a.anchor-url[href="https://t.me/waveonsuibot/walletapp"]')
+                    await wavePage.waitForSelector('a.anchor-url[href="https://t.me/waveonsuibot/walletapp"]')
                     await sleep(3000)
-                    await page.click('a.anchor-url[href="https://t.me/waveonsuibot/walletapp"]')
+                    await wavePage.click('a.anchor-url[href="https://t.me/waveonsuibot/walletapp"]')
                 }
 
                 isContinue = await checkCommand(openWallet, x, 'Click Open Wallet')
@@ -808,9 +809,9 @@ async function main() {
 
                 // Click Button Launch
                 const buttonLaunch = async (x) => {
-                    await page.waitForSelector('body > div.popup.popup-peer.popup-confirmation.active > div > div.popup-buttons > button:nth-child(1)')
+                    await wavePage.waitForSelector('body > div.popup.popup-peer.popup-confirmation.active > div > div.popup-buttons > button:nth-child(1)')
                     await sleep(3000)
-                    await page.click('body > div.popup.popup-peer.popup-confirmation.active > div > div.popup-buttons > button:nth-child(1)')
+                    await wavePage.click('body > div.popup.popup-peer.popup-confirmation.active > div > div.popup-buttons > button:nth-child(1)')
                 }
 
                 isContinue = await checkCommand(buttonLaunch, x, 'Click Button Launch')
@@ -827,8 +828,8 @@ async function main() {
                 const iframeSelector = '.payment-verification';
                 let iframeElementHandle
                 const handleFrame = async () => {
-                    await page.waitForSelector(iframeSelector)
-                    iframeElementHandle = await page.$(iframeSelector);
+                    await wavePage.waitForSelector(iframeSelector)
+                    iframeElementHandle = await wavePage.$(iframeSelector);
                 }
 
                 isContinue = await checkCommand(handleFrame, x, 'Handle iframe')
@@ -971,8 +972,8 @@ async function main() {
 
                             // Click Back
                             const clickBack = async () => {
-                                await page.waitForSelector('.popup-close');
-                                await page.click('.popup-close');
+                                await wavePage.waitForSelector('.popup-close');
+                                await wavePage.click('.popup-close');
                             }
 
                             isContinue = await checkCommand(clickBack, x, 'Click Back')
