@@ -106,7 +106,7 @@ async function checkCommand(element, profile, message) {
                 trycheckCommand++
             }
         } else {
-            prettyConsole(chalk.red(`Profile ${x} ${message} Show So Take Long Time`))
+            prettyConsole(chalk.red(`Profile ${profile} ${message} Show So Take Long Time`))
             checkCommand = true
             return false
         }
