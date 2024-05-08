@@ -79,15 +79,16 @@ const changeCronSchedule = (minute) => {
     });
 };
 
+async function rest() {
+    const rest = (Math.random() * (30 - 15) + 15) * 1000
+    prettyConsole(chalk.green(`Take rest for ${Math.floor(rest / 1000)} second\n`))
+    await sleep(rest)
+}
+
 async function killApps() {
     exec('taskkill /F /IM chrome.exe');
     exec('taskkill /F /IM openvpn-gui.exe');
     exec('taskkill /F /IM openvpn.exe');
-
-    const rest = (Math.random() * (30 - 15) + 15) * 1000
-    prettyConsole(chalk.green(`Take rest for ${Math.floor(rest / 1000)} second\n`))
-
-    return rest
 }
 
 async function checkCommand(element, profile, message) {
@@ -571,11 +572,8 @@ async function main() {
                     isContinue = await checkCommand(clickGas, x, 'Click Gas')
 
                     if (!isContinue) {
-                        await browser.close()
-                        exec(`${ovpnPath} --command disconnect ${ovpnConfig[x]}`);
-                        const rest = (Math.random() * (30 - 15) + 15) * 1000
-                        prettyConsole(chalk.green(`VPN Disconnect, Take rest for ${Math.floor(rest / 1000)} second\n`))
-                        await sleep(rest)
+                        await killApps()
+                        await rest()
                         continue mainLoop
                     }
 
@@ -590,11 +588,8 @@ async function main() {
                     isContinue = await checkCommand(tabGas, x, 'Click Tab Gas')
 
                     if (!isContinue) {
-                        await browser.close()
-                        exec(`${ovpnPath} --command disconnect ${ovpnConfig[x]}`);
-                        const rest = (Math.random() * (30 - 15) + 15) * 1000
-                        prettyConsole(chalk.green(`VPN Disconnect, Take rest for ${Math.floor(rest / 1000)} second\n`))
-                        await sleep(rest)
+                        await killApps()
+                        await rest()
                         continue mainLoop
                     }
 
@@ -615,11 +610,8 @@ async function main() {
                     isContinue = await checkCommand(checkGas, x, 'Check Gas Free Amount')
 
                     if (!isContinue) {
-                        await browser.close()
-                        exec(`${ovpnPath} --command disconnect ${ovpnConfig[x]}`);
-                        const rest = (Math.random() * (30 - 15) + 15) * 1000
-                        prettyConsole(chalk.green(`VPN Disconnect, Take rest for ${Math.floor(rest / 1000)} second\n`))
-                        await sleep(rest)
+                        await killApps()
+                        await rest()
                         continue mainLoop
                     }
 
@@ -634,11 +626,8 @@ async function main() {
                     isContinue = await checkCommand(clickBack, x, 'Click Back')
 
                     if (!isContinue) {
-                        await browser.close()
-                        exec(`${ovpnPath} --command disconnect ${ovpnConfig[x]}`);
-                        const rest = (Math.random() * (30 - 15) + 15) * 1000
-                        prettyConsole(chalk.green(`VPN Disconnect, Take rest for ${Math.floor(rest / 1000)} second\n`))
-                        await sleep(rest)
+                        await killApps()
+                        await rest()
                         continue mainLoop
                     }
 
@@ -646,11 +635,8 @@ async function main() {
                     isContinue = await checkCommand(clickStorage, x, 'Click Storage')
 
                     if (!isContinue) {
-                        await browser.close()
-                        exec(`${ovpnPath} --command disconnect ${ovpnConfig[x]}`);
-                        const rest = (Math.random() * (30 - 15) + 15) * 1000
-                        prettyConsole(chalk.green(`VPN Disconnect, Take rest for ${Math.floor(rest / 1000)} second\n`))
-                        await sleep(rest)
+                        await killApps()
+                        await rest()
                         continue mainLoop
                     }
 
@@ -722,11 +708,8 @@ async function main() {
                                     isContinue = await checkCommand(clickBoost, x, 'Click Boost')
 
                                     if (!isContinue) {
-                                        await browser.close()
-                                        exec(`${ovpnPath} --command disconnect ${ovpnConfig[x]}`);
-                                        const rest = (Math.random() * (30 - 15) + 15) * 1000
-                                        prettyConsole(chalk.green(`VPN Disconnect, Take rest for ${Math.floor(rest / 1000)} second\n`))
-                                        await sleep(rest)
+                                        await killApps()
+                                        await rest()
                                         continue mainLoop
                                     }
 
@@ -743,11 +726,8 @@ async function main() {
                                     isContinue = await checkCommand(clickBack, x, 'Click Back')
 
                                     if (!isContinue) {
-                                        await browser.close()
-                                        exec(`${ovpnPath} --command disconnect ${ovpnConfig[x]}`);
-                                        const rest = (Math.random() * (30 - 15) + 15) * 1000
-                                        prettyConsole(chalk.green(`VPN Disconnect, Take rest for ${Math.floor(rest / 1000)} second\n`))
-                                        await sleep(rest)
+                                        await killApps()
+                                        await rest()
                                         continue mainLoop
                                     }
 
@@ -802,8 +782,8 @@ async function main() {
                 isContinue = await checkCommand(gotoLink, x, 'gotoLink')
 
                 if (!isContinue) {
-                    const rest = await killApps()
-                    await sleep(rest)
+                    await killApps()
+                    await rest()
                     continue mainLoop
                 }
 
@@ -819,8 +799,8 @@ async function main() {
                 isContinue = await checkCommand(openWallet, x, 'Click Open Wallet')
 
                 if (!isContinue) {
-                    const rest = await killApps()
-                    await sleep(rest)
+                    await killApps()
+                    await rest()
                     continue mainLoop
                 }
 
@@ -836,8 +816,8 @@ async function main() {
                 isContinue = await checkCommand(buttonLaunch, x, 'Click Button Launch')
 
                 if (!isContinue) {
-                    const rest = await killApps()
-                    await sleep(rest)
+                    await killApps()
+                    await rest()
                     continue mainLoop
                 }
 
@@ -854,8 +834,8 @@ async function main() {
                 isContinue = await checkCommand(handleFrame, x, 'Handle iframe')
 
                 if (!isContinue) {
-                    const rest = await killApps()
-                    await sleep(rest)
+                    await killApps()
+                    await rest()
                     continue mainLoop
                 }
 
@@ -874,8 +854,8 @@ async function main() {
                 isContinue = await checkCommand(claimNow, x, 'Click Claim Now')
 
                 if (!isContinue) {
-                    const rest = await killApps()
-                    await sleep(rest)
+                    await killApps()
+                    await rest()
                     continue mainLoop
                 }
 
@@ -893,8 +873,8 @@ async function main() {
                 isContinue = await checkCommand(checkBalance, x, 'Check Balance')
 
                 if (!isContinue) {
-                    const rest = await killApps()
-                    await sleep(rest)
+                    await killApps()
+                    await rest()
                     continue mainLoop
                 }
 
@@ -914,8 +894,8 @@ async function main() {
                 isContinue = await checkCommand(checkSpeed, x, 'Check Speed')
 
                 if (!isContinue) {
-                    const rest = await killApps()
-                    await sleep(rest)
+                    await killApps()
+                    await rest()
                     continue mainLoop
                 }
 
@@ -942,8 +922,8 @@ async function main() {
                     isContinue = await checkCommand(checkClaimTime, x, 'Check Claim Time')
 
                     if (!isContinue) {
-                        const rest = await killApps()
-                        await sleep(rest)
+                        await killApps()
+                        await rest()
                         continue mainLoop
                     }
 
@@ -965,8 +945,8 @@ async function main() {
                         isContinue = await checkCommand(claimWaveButton, x, 'Claim Wave')
 
                         if (!isContinue) {
-                            const rest = await killApps()
-                            await sleep(rest)
+                            await killApps()
+                            await rest()
                             continue mainLoop
                         }
 
@@ -998,16 +978,16 @@ async function main() {
                             isContinue = await checkCommand(clickBack, x, 'Click Back')
 
                             if (!isContinue) {
-                                const rest = await killApps()
-                                await sleep(rest)
+                                await killApps()
+                                await rest()
                                 continue mainLoop
                             }
 
                             isContinue = await checkCommand(claimNow, x, 'Click Claim Now')
 
                             if (!isContinue) {
-                                const rest = await killApps()
-                                await sleep(rest)
+                                await killApps()
+                                await rest()
                                 continue mainLoop
                             }
 
