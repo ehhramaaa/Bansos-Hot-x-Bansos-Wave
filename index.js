@@ -428,7 +428,7 @@ async function main() {
 
             const hotWallet = true;
 
-            if (hotWallet) {
+            if (hotWallet && x !== 22) {
                 console.log(chalk.cyan(`\n<==================================[Bansos ${chalk.yellow('$HOT🔥')}]==================================>`))
                 // Goto Link
                 const gotoLink = async (x) => {
