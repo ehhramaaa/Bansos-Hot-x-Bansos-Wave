@@ -948,6 +948,8 @@ async function main() {
                     continue mainLoop
                 }
 
+                await sleep(3000)
+
                 let balanceWave
 
                 // Check Balance
@@ -966,6 +968,8 @@ async function main() {
                     await rest()
                     continue mainLoop
                 }
+
+                await sleep(3000)
 
                 prettyConsole(chalk.green(`Balance\t:${balanceWave} ${chalk.cyan('Wave💎')}`))
 
@@ -988,11 +992,11 @@ async function main() {
                     continue mainLoop
                 }
 
-                prettyConsole(chalk.green(`Speed\t:${speed}/Hours`))
+                prettyConsole(chalk.green(`Speed\t:${speed} Wave💎/Hours`))
 
                 let storage
 
-                // Check Speed
+                // Check Storage
                 const checkStorage = async (x) => {
                     await iframe.waitForSelector('#section-transaction > div.direction-tab.flex.flex-col.items-center.gap-6.pt-4 > div.menu-block > div > div.menu_2.relative > div.menu_title.flex.flex-row.justify-between.items-center.absolute > div > span.time');
                     storage = await iframe.evaluate(() => {
@@ -1009,7 +1013,7 @@ async function main() {
                     continue mainLoop
                 }
 
-                prettyConsole(chalk.green(`Storage\t:${storage} ${chalk.cyan('Wave💎')}`))
+                prettyConsole(chalk.green(`Max Storage\t:${storage} Hours`))
 
                 let claim = false
 
