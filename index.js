@@ -331,7 +331,7 @@ async function main() {
     const minute = Math.floor(Math.random() * (15 - 1 + 1)) + 1
     const ovpnConfig = await ovpnReadConfig(folderPath)
 
-    mainLoop: for (let x = 22; x <= 22; x++) {
+    mainLoop: for (let x = 0; x <= 22; x++) {
 
         await killApps()
 
