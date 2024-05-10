@@ -380,7 +380,7 @@ async function main() {
                         headless: false,
                         args: [
                             `--user-data-dir=${chromeUserPath}`,
-                            '--profile-directory=Profile 0'
+                            '--profile-directory=Profile 23'
                         ]
                     };
 
