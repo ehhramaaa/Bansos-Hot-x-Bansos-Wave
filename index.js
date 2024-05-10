@@ -351,7 +351,7 @@ async function main() {
         if (x === 22) {
             isVpn = true
         } else {
-            const tryVpn = 0
+            let tryVpn = 0
             while (!isVpn) {
                 vpn = await checkIp();
                 if (vpn !== ip) {
