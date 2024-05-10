@@ -359,7 +359,7 @@ const upgradeBoat = async (iframe, balance, x) => {
         return false
     }
 
-    prettyConsole(chalk.green(`Price Upgrade Boat :${price} ${chalk.cyan('Wave')}`))
+    prettyConsole(chalk.green(`Price Upgrade Boat :${price} ${chalk.cyan('Wave💎')}`))
 
     if (balance >= (price * 2)) {
         // Click Upgrade
@@ -398,18 +398,19 @@ const upgradeBoat = async (iframe, balance, x) => {
             prettyConsole(chalk.red(`Upgrade Boat Failed!!!`))
         }
     } else {
-        prettyConsole(chalk.green(`Balance Not Enough For Upgrade Boat`))
+        prettyConsole(chalk.yellow(`Balance Not Enough For Upgrade Boat`))
     }
 
 }
 
 async function main() {
     console.log(chalk.cyan(`\n<==================================[${moment().format('HH:mm:ss DD-MM-YYYY')}]==================================>`))
-
+    
     const minute = Math.floor(Math.random() * (15 - 1 + 1)) + 1
     const ovpnConfig = await ovpnReadConfig(folderPath)
-
+    
     mainLoop: for (let x = 0; x <= 22; x++) {
+        console.log(chalk.cyan(`\n<===============================================================================================================>`))
 
         await killApps()
 
@@ -507,7 +508,7 @@ async function main() {
             const hotWallet = true;
 
             if (hotWallet && x !== 22) {
-                console.log(chalk.cyan(`\n<==================================[Bansos ${chalk.yellow('$HOT🔥')}]==================================>`))
+                console.log(chalk.cyan(`\n[Bansos ${chalk.yellow('$HOT🔥')}]`))
                 // Goto Link
                 const gotoLink = async (x) => {
                     await page.goto('https://web.telegram.org/k/#@herewalletbot', { waitUntil: ['networkidle2', 'domcontentloaded'] });
@@ -859,7 +860,7 @@ async function main() {
             const waveWallet = true;
             if (waveWallet) {
                 const wavePage = await browser.newPage()
-                console.log(chalk.cyan(`\n<==================================[Bansos ${chalk.cyan('Wave💎')}]==================================>`))
+                console.log(chalk.cyan(`\n[Bansos ${chalk.cyan('Wave💎')}]`))
                 // Goto Link
                 const gotoLink = async () => {
                     await wavePage.goto('https://web.telegram.org/k/#@waveonsuibot', { waitUntil: ['networkidle2', 'domcontentloaded'] });
@@ -945,12 +946,12 @@ async function main() {
                     continue mainLoop
                 }
 
-                let balance
+                let balanceWave
 
                 // Check Balance
                 const checkBalance = async (x) => {
                     await iframe.waitForSelector('#section-transaction > div.block-data.h-full > div > div.flex.item-bl-1.flex-row.items-center > div.left.relative > p');
-                    balance = await iframe.evaluate(() => {
+                    balanceWave = await iframe.evaluate(() => {
                         const element = document.querySelector('#section-transaction > div.block-data.h-full > div > div.flex.item-bl-1.flex-row.items-center > div.left.relative > p');
                         return parseFloat(element.textContent)
                     });
@@ -964,7 +965,7 @@ async function main() {
                     continue mainLoop
                 }
 
-                prettyConsole(chalk.green(`Balance\t:${balance} ${chalk.cyan('Wave💎')}`))
+                prettyConsole(chalk.green(`Balance\t:${balanceWave} ${chalk.cyan('Wave💎')}`))
 
                 let speed
 
@@ -1049,7 +1050,7 @@ async function main() {
                             });
                         }
 
-                        isContinue = await checkCommand(claimWaveButton, x, 'Claim Wave')
+                        isContinue = await checkCommand(claimWaveButton, x, 'Claim Wave💎')
 
                         if (!isContinue) {
                             await killApps()
@@ -1109,7 +1110,7 @@ async function main() {
                     }
                 }
 
-                await upgradeBoat(iframe, balance, x)
+                await upgradeBoat(iframe, balanceWave, x)
             }
 
             await killApps()
