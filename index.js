@@ -514,9 +514,9 @@ async function main() {
 
                 // Get Near Balance
                 const nearBalance = async (x) => {
-                    await iframe.waitForSelector('#root > div > div > div > div > div:nth-child(6) > div:nth-child(2) > div > div:nth-child(3) > p:nth-child(2)');
+                    await iframe.waitForSelector('#root > div > div > div:nth-child(1) > div > div > div:nth-child(6) > div:nth-child(2) > div:nth-child(1)  > div:nth-child(2) > p:nth-child(2)');
                     near = await iframe.evaluate(() => {
-                        const element = document.querySelector('#root > div > div > div > div > div:nth-child(6) > div:nth-child(2) > div > div:nth-child(3) > p:nth-child(2)');
+                        const element = document.querySelector('#root > div > div > div:nth-child(1) > div > div > div:nth-child(6) > div:nth-child(2) > div:nth-child(1)  > div:nth-child(2) > p:nth-child(2)');
                         return element.textContent
                     })
                 }
@@ -529,9 +529,9 @@ async function main() {
 
                 // Check Balance
                 const checkBalance = async (x) => {
-                    await iframe.waitForSelector('#root > div > div > div > div > div:nth-child(4) > div:nth-child(1) > div:nth-child(2) > div > p');
+                    await iframe.waitForSelector('#root > div > div > div:nth-child(1) > div > div > div:nth-child(4) > div:nth-child(1) > div:nth-child(2) > div > p');
                     balance = await iframe.evaluate(() => {
-                        const element = document.querySelector('#root > div > div > div > div > div:nth-child(4) > div:nth-child(1) > div:nth-child(2) > div > p');
+                        const element = document.querySelector('#root > div > div > div:nth-child(1) > div > div > div:nth-child(4) > div:nth-child(1) > div:nth-child(2) > div > p');
                         return parseFloat(element.textContent)
                     });
                 }
@@ -552,8 +552,9 @@ async function main() {
                 // Check Storage
                 const checkStorage = async (x) => {
                     await iframe.waitForSelector('#root > div > div > div > div > div:nth-child(4) > div:nth-child(2) > div > div:nth-child(1) > div');
+                    await iframe.waitForSelector('#root > div > div > div:nth-child(1) > div > div > div:nth-child(4) > div:nth-child(2) > div > div:nth-child(1) > div');
                     storage = await iframe.evaluate(() => {
-                        const element = document.querySelector('#root > div > div > div > div > div:nth-child(4) > div:nth-child(2) > div > div:nth-child(1) > div');
+                        const element = document.querySelector('#root > div > div > div:nth-child(1) > div > div > div:nth-child(4) > div:nth-child(2) > div > div:nth-child(1) > div');
                         const height = window.getComputedStyle(element).getPropertyValue("height").match(/\d+(\.\d+)?/);
                         return Math.floor(parseFloat(height[0]))
                     });
@@ -569,9 +570,9 @@ async function main() {
 
                 // Click Storage
                 const clickStorage = async (x) => {
-                    await iframe.waitForSelector('#root > div > div > div > div > div:nth-child(4) > div:nth-child(2)');
+                    await iframe.waitForSelector('#root > div > div > div:nth-child(1) > div > div > div:nth-child(4) > div:nth-child(2)');
                     await iframe.evaluate(() => {
-                        document.querySelector('#root > div > div > div > div > div:nth-child(4) > div:nth-child(2)').click();
+                        document.querySelector('#root > div > div > div:nth-child(1) > div > div > div:nth-child(4) > div:nth-child(2)').click();
                     });
                 }
 
@@ -584,6 +585,7 @@ async function main() {
                 if (storage >= threshold) {
                     // Click Gas
                     const clickGas = async (x) => {
+                        await iframe.waitForSelector('#root > div > div > div:nth-child(3) > div > div:nth-child(4) > div > div:nth-child(1)');
                         await iframe.waitForSelector('#root > div > div > div:nth-child(3) > div > div:nth-child(4) > div > div:nth-child(1)');
                         await iframe.evaluate(() => {
                             document.querySelector('#root > div > div > div:nth-child(3) > div > div:nth-child(4) > div > div:nth-child(1)').click();
