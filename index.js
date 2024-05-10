@@ -510,20 +510,20 @@ async function main() {
 
                 prettyConsole(chalk.green(`Account\t:${account}`))
 
-                let near
+                // let near
 
-                // Get Near Balance
-                const nearBalance = async (x) => {
-                    await iframe.waitForSelector('#root > div > div > div:nth-child(1) > div > div > div:nth-child(6) > div:nth-child(2) > div:nth-child(1)  > div:nth-child(2) > p:nth-child(2)');
-                    near = await iframe.evaluate(() => {
-                        const element = document.querySelector('#root > div > div > div:nth-child(1) > div > div > div:nth-child(6) > div:nth-child(2) > div:nth-child(1)  > div:nth-child(2) > p:nth-child(2)');
-                        return element.textContent
-                    })
-                }
+                // // Get Near Balance
+                // const nearBalance = async (x) => {
+                //     await iframe.waitForSelector('#root > div > div > div:nth-child(1) > div > div > div:nth-child(6) > div:nth-child(2) > div:nth-child(1)  > div:nth-child(2) > p:nth-child(2)');
+                //     near = await iframe.evaluate(() => {
+                //         const element = document.querySelector('#root > div > div > div:nth-child(1) > div > div > div:nth-child(6) > div:nth-child(2) > div:nth-child(1)  > div:nth-child(2) > p:nth-child(2)');
+                //         return element.textContent
+                //     })
+                // }
 
-                await checkCommand(nearBalance, x, 'Get Near Balance')
+                // await checkCommand(nearBalance, x, 'Get Near Balance')
 
-                prettyConsole(chalk.green(`Near Balance\t:${near}`))
+                // prettyConsole(chalk.green(`Near Balance\t:${near}`))
 
                 let balance
 
