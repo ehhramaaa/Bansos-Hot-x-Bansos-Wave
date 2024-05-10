@@ -335,22 +335,21 @@ async function main() {
 
         await killApps()
 
-        await sleep(7000)
-
         const ip = await checkIp()
         prettyConsole(chalk.yellow(`Current IP : ${ip}`))
 
-        exec(`${ovpnPath} --command connect ${ovpnConfig[x]}`);
-
-        // Wait for VPN connection to be established
-        await new Promise(resolve => setTimeout(resolve, 5000));
+        await sleep(7000)
 
         let isVpn = false;
         let vpn, browser, isContinue, isBrowser
-
+        
         if (x === 22) {
             isVpn = true
         } else {
+            exec(`${ovpnPath} --command connect ${ovpnConfig[x]}`);
+    
+            // Wait for VPN connection to be established
+            await new Promise(resolve => setTimeout(resolve, 5000));
             let tryVpn = 0
             while (!isVpn) {
                 vpn = await checkIp();
