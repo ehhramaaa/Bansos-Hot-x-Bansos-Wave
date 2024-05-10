@@ -335,11 +335,11 @@ async function main() {
 
         await killApps()
 
+        await sleep(7000)
+        
         const ip = await checkIp()
         prettyConsole(chalk.yellow(`Current IP : ${ip}`))
-
-        await sleep(7000)
-
+        
         let isVpn = false;
         let vpn, browser, isContinue, isBrowser
         
@@ -376,7 +376,7 @@ async function main() {
             if (x === 22) {
                 const connectBrowser = async () => {
                     let launchOptions = {
-                        headless: false,
+                        headless: true,
                         args: [
                             `--user-data-dir=${chromeUserPath}`,
                             '--profile-directory=Profile 23'
@@ -398,7 +398,7 @@ async function main() {
             } else {
                 const connectBrowser = async () => {
                     let launchOptions = {
-                        headless: false,
+                        headless: true,
                         args: [
                             `--user-data-dir=${chromeUserPath}`,
                             x === 0 ? '--profile-directory=Default' : `--profile-directory=Profile ${x}`
@@ -551,7 +551,6 @@ async function main() {
 
                 // Check Storage
                 const checkStorage = async (x) => {
-                    await iframe.waitForSelector('#root > div > div > div > div > div:nth-child(4) > div:nth-child(2) > div > div:nth-child(1) > div');
                     await iframe.waitForSelector('#root > div > div > div:nth-child(1) > div > div > div:nth-child(4) > div:nth-child(2) > div > div:nth-child(1) > div');
                     storage = await iframe.evaluate(() => {
                         const element = document.querySelector('#root > div > div > div:nth-child(1) > div > div > div:nth-child(4) > div:nth-child(2) > div > div:nth-child(1) > div');
@@ -585,7 +584,6 @@ async function main() {
                 if (storage >= threshold) {
                     // Click Gas
                     const clickGas = async (x) => {
-                        await iframe.waitForSelector('#root > div > div > div:nth-child(3) > div > div:nth-child(4) > div > div:nth-child(1)');
                         await iframe.waitForSelector('#root > div > div > div:nth-child(3) > div > div:nth-child(4) > div > div:nth-child(1)');
                         await iframe.evaluate(() => {
                             document.querySelector('#root > div > div > div:nth-child(3) > div > div:nth-child(4) > div > div:nth-child(1)').click();
