@@ -338,7 +338,7 @@ async function main() {
         await sleep(7000)
 
         const ip = await checkIp()
-        prettyConsole(chalk.magenta(`Current IP : ${ip}`))
+        prettyConsole(chalk.yellow(`Current IP : ${ip}`))
 
         exec(`${ovpnPath} --command connect ${ovpnConfig[x]}`);
 
@@ -351,14 +351,23 @@ async function main() {
         if (x === 22) {
             isVpn = true
         } else {
+            const tryVpn = 0
             while (!isVpn) {
                 vpn = await checkIp();
                 if (vpn !== ip) {
                     isVpn = true;
                     prettyConsole(chalk.green(`VPN connected successfully!, IP : ${vpn}`));
                 }
-    
+
                 await new Promise(resolve => setTimeout(resolve, 5000));
+
+                if (tryVpn === 50) {
+                    await killApps();
+                    await rest()
+                    continue mainLoop
+                }
+
+                tryVpn++
             }
         }
 
@@ -368,24 +377,24 @@ async function main() {
             if (x === 22) {
                 const connectBrowser = async () => {
                     let launchOptions = {
-                        headless: true,
+                        headless: false,
                         args: [
                             `--user-data-dir=${chromeUserPath}`,
                             '--profile-directory=Profile 0'
                         ]
                     };
-    
+
                     browser = await puppeteer.launch(launchOptions)
-    
+
                     const browserConnected = await browser.isConnected()
-    
+
                     if (browserConnected) {
                         isBrowser = true;
                     } else {
                         prettyConsole(chalk.red(`Try Hard To Launch Browser!, Switch Next Profile`))
                     }
                 }
-    
+
                 await checkCommand(connectBrowser, x, "connectBrowser")
             } else {
                 const connectBrowser = async () => {
@@ -396,18 +405,18 @@ async function main() {
                             x === 0 ? '--profile-directory=Default' : `--profile-directory=Profile ${x}`
                         ]
                     };
-    
+
                     browser = await puppeteer.launch(launchOptions)
-    
+
                     const browserConnected = await browser.isConnected()
-    
+
                     if (browserConnected) {
                         isBrowser = true;
                     } else {
                         prettyConsole(chalk.red(`Try Hard To Launch Browser!, Switch Next Profile`))
                     }
                 }
-    
+
                 await checkCommand(connectBrowser, x, "connectBrowser")
             }
 
@@ -430,9 +439,7 @@ async function main() {
                 isContinue = await checkCommand(gotoLink, x, 'Goto Link')
 
                 if (!isContinue) {
-                    await killApps()
-                    await rest()
-                    continue mainLoop
+                    break
                 }
 
                 await sleep(3000)
@@ -447,9 +454,7 @@ async function main() {
                 isContinue = await checkCommand(claimNow, x, 'Click Claim Now')
 
                 if (!isContinue) {
-                    await killApps()
-                    await rest()
-                    continue mainLoop
+                    break
                 }
 
                 await sleep(3000)
@@ -464,9 +469,7 @@ async function main() {
                 isContinue = await checkCommand(buttonLaunch, x, 'Click Button Launch')
 
                 if (!isContinue) {
-                    await killApps()
-                    await rest()
-                    continue mainLoop
+                    break
                 }
 
                 await sleep(3000)
@@ -482,9 +485,7 @@ async function main() {
                 isContinue = await checkCommand(handleFrame, x, 'Handle iframe')
 
                 if (!isContinue) {
-                    await killApps()
-                    await rest()
-                    continue mainLoop
+                    break
                 }
 
                 await sleep(3000)
@@ -505,9 +506,7 @@ async function main() {
                 isContinue = await checkCommand(getAccountName, x, 'Get Account Name')
 
                 if (!isContinue) {
-                    await killApps()
-                    await rest()
-                    continue mainLoop
+                    break
                 }
 
                 prettyConsole(chalk.green(`Account\t:${account}`))
@@ -541,9 +540,7 @@ async function main() {
                 isContinue = await checkCommand(checkBalance, x, 'Check Balance')
 
                 if (!isContinue) {
-                    await killApps()
-                    await rest()
-                    continue mainLoop
+                    break
                 }
 
                 prettyConsole(chalk.green(`Balance\t:${balance} ${chalk.yellow('$HOT🔥')}`))
@@ -566,9 +563,7 @@ async function main() {
                 isContinue = await checkCommand(checkStorage, x, 'Check Storage')
 
                 if (!isContinue) {
-                    await killApps()
-                    await rest()
-                    continue mainLoop
+                    break
                 }
 
                 prettyConsole(chalk.green(`Storage\t:${storage}%`))
@@ -584,9 +579,7 @@ async function main() {
                 isContinue = await checkCommand(clickStorage, x, 'Click Storage')
 
                 if (!isContinue) {
-                    await killApps()
-                    await rest()
-                    continue mainLoop
+                    break
                 }
 
                 if (storage >= threshold) {
@@ -601,9 +594,7 @@ async function main() {
                     isContinue = await checkCommand(clickGas, x, 'Click Gas')
 
                     if (!isContinue) {
-                        await killApps()
-                        await rest()
-                        continue mainLoop
+                        break
                     }
 
                     // Click Tab Gas
@@ -617,9 +608,7 @@ async function main() {
                     isContinue = await checkCommand(tabGas, x, 'Click Tab Gas')
 
                     if (!isContinue) {
-                        await killApps()
-                        await rest()
-                        continue mainLoop
+                        break
                     }
 
                     // Wait For Counting Gas Amount
@@ -639,9 +628,7 @@ async function main() {
                     isContinue = await checkCommand(checkGas, x, 'Check Gas Free Amount')
 
                     if (!isContinue) {
-                        await killApps()
-                        await rest()
-                        continue mainLoop
+                        break
                     }
 
                     prettyConsole(chalk.green(`Gas Free\t:${gasFree}`))
@@ -655,18 +642,14 @@ async function main() {
                     isContinue = await checkCommand(clickBack, x, 'Click Back')
 
                     if (!isContinue) {
-                        await killApps()
-                        await rest()
-                        continue mainLoop
+                        break
                     }
 
                     // Click Storage
                     isContinue = await checkCommand(clickStorage, x, 'Click Storage')
 
                     if (!isContinue) {
-                        await killApps()
-                        await rest()
-                        continue mainLoop
+                        break
                     }
 
                     await sleep(3000)
@@ -737,9 +720,7 @@ async function main() {
                                     isContinue = await checkCommand(clickBoost, x, 'Click Boost')
 
                                     if (!isContinue) {
-                                        await killApps()
-                                        await rest()
-                                        continue mainLoop
+                                        break
                                     }
 
                                     await sleep(5000)
@@ -755,9 +736,7 @@ async function main() {
                                     isContinue = await checkCommand(clickBack, x, 'Click Back')
 
                                     if (!isContinue) {
-                                        await killApps()
-                                        await rest()
-                                        continue mainLoop
+                                        break
                                     }
 
                                     prettyConsole(chalk.red(`Try To Re-Claim ${chalk.yellow('$HOT🔥')}`))
@@ -934,7 +913,7 @@ async function main() {
                 let storage
 
                 // Check Speed
-                const checkStorage= async (x) => {
+                const checkStorage = async (x) => {
                     await iframe.waitForSelector('#section-transaction > div.direction-tab.flex.flex-col.items-center.gap-6.pt-4 > div.menu-block > div > div.menu_2.relative > div.menu_title.flex.flex-row.justify-between.items-center.absolute > div > span.time');
                     storage = await iframe.evaluate(() => {
                         const element = document.querySelector('#section-transaction > div.direction-tab.flex.flex-col.items-center.gap-6.pt-4 > div.menu-block > div > div.menu_2.relative > div.menu_title.flex.flex-row.justify-between.items-center.absolute > div > span.time');
