@@ -410,7 +410,9 @@ async function main() {
     const ovpnConfig = await ovpnReadConfig(folderPath)
     
     mainLoop: for (let x = 0; x <= 22; x++) {
-        console.log(chalk.cyan(`\n<===============================================================================================================>`))
+        if (x !== 0){
+            console.log(chalk.cyan(`\n<===============================================================================================================>`))
+        }
 
         await killApps()
 
