@@ -496,9 +496,9 @@ async function main() {
 
                 // Get Account Name
                 const getAccountName = async (x) => {
-                    await iframe.waitForSelector('#root > div > div > div > div > div:nth-child(1) > p');
+                    await iframe.waitForSelector('#root > div > div > div:nth-child(1) > div > div > div:nth-child(1) > p');
                     account = await iframe.evaluate(() => {
-                        const element = document.querySelector('#root > div > div > div > div > div:nth-child(1) > p');
+                        const element = document.querySelector('#root > div > div > div:nth-child(1) > div > div > div:nth-child(1) > p');
                         return element.textContent
                     })
                 }
