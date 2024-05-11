@@ -392,7 +392,7 @@ const upgradeBoat = async (iframe, balance, x) => {
             return false
         }
 
-        if (price > newPrice){
+        if (price > newPrice) {
             prettyConsole(chalk.green(`Upgrade Boat Successfully`))
         } else {
             prettyConsole(chalk.red(`Upgrade Boat Failed!!!`))
@@ -405,12 +405,12 @@ const upgradeBoat = async (iframe, balance, x) => {
 
 async function main() {
     console.log(chalk.cyan(`\n<==================================[${moment().format('HH:mm:ss DD-MM-YYYY')}]==================================>`))
-    
+
     const minute = Math.floor(Math.random() * (15 - 1 + 1)) + 1
     const ovpnConfig = await ovpnReadConfig(folderPath)
-    
+
     mainLoop: for (let x = 0; x <= 22; x++) {
-        if (x !== 0){
+        if (x !== 0) {
             console.log(chalk.cyan(`\n<===============================================================================================================>`))
         }
 
@@ -475,7 +475,12 @@ async function main() {
                     }
                 }
 
-                await checkCommand(connectBrowser, x, "connectBrowser")
+                isContinue = await checkCommand(connectBrowser, x, "connectBrowser")
+
+                if (!isContinue) {
+                    await rest();
+                    continue mainLoop
+                }
             } else {
                 const connectBrowser = async () => {
                     let launchOptions = {
@@ -497,7 +502,13 @@ async function main() {
                     }
                 }
 
-                await checkCommand(connectBrowser, x, "connectBrowser")
+                isContinue = await checkCommand(connectBrowser, x, "connectBrowser")
+
+                
+                if (!isContinue) {
+                    await rest();
+                    continue mainLoop
+                }
             }
 
             await sleep(3000)
@@ -871,7 +882,6 @@ async function main() {
                 isContinue = await checkCommand(gotoLink, x, 'gotoLink')
 
                 if (!isContinue) {
-                    await killApps()
                     await rest()
                     continue mainLoop
                 }
@@ -888,7 +898,6 @@ async function main() {
                 isContinue = await checkCommand(openWallet, x, 'Click Open Wallet')
 
                 if (!isContinue) {
-                    await killApps()
                     await rest()
                     continue mainLoop
                 }
@@ -905,7 +914,6 @@ async function main() {
                 isContinue = await checkCommand(buttonLaunch, x, 'Click Button Launch')
 
                 if (!isContinue) {
-                    await killApps()
                     await rest()
                     continue mainLoop
                 }
@@ -923,7 +931,6 @@ async function main() {
                 isContinue = await checkCommand(handleFrame, x, 'Handle iframe')
 
                 if (!isContinue) {
-                    await killApps()
                     await rest()
                     continue mainLoop
                 }
@@ -943,7 +950,6 @@ async function main() {
                 isContinue = await checkCommand(claimNow, x, 'Click Claim Now')
 
                 if (!isContinue) {
-                    await killApps()
                     await rest()
                     continue mainLoop
                 }
@@ -964,7 +970,6 @@ async function main() {
                 isContinue = await checkCommand(checkBalance, x, 'Check Balance')
 
                 if (!isContinue) {
-                    await killApps()
                     await rest()
                     continue mainLoop
                 }
@@ -987,7 +992,6 @@ async function main() {
                 isContinue = await checkCommand(checkSpeed, x, 'Check Speed')
 
                 if (!isContinue) {
-                    await killApps()
                     await rest()
                     continue mainLoop
                 }
@@ -1008,7 +1012,6 @@ async function main() {
                 isContinue = await checkCommand(checkStorage, x, 'Check Speed')
 
                 if (!isContinue) {
-                    await killApps()
                     await rest()
                     continue mainLoop
                 }
@@ -1036,7 +1039,6 @@ async function main() {
                     isContinue = await checkCommand(checkClaimTime, x, 'Check Claim Time')
 
                     if (!isContinue) {
-                        await killApps()
                         await rest()
                         continue mainLoop
                     }
@@ -1059,7 +1061,6 @@ async function main() {
                         isContinue = await checkCommand(claimWaveButton, x, 'Claim Wave💎')
 
                         if (!isContinue) {
-                            await killApps()
                             await rest()
                             continue mainLoop
                         }
@@ -1079,6 +1080,8 @@ async function main() {
                             }
                         } while (checkClaim < 3 && !claimed)
 
+                        await sleep(3000)
+
                         // Tweaking
                         if (!claimed) {
                             prettyConsole(chalk.yellow(`Claiming ${chalk.cyan('Wave💎')} Failed!, Tweaking`))
@@ -1092,7 +1095,6 @@ async function main() {
                             isContinue = await checkCommand(clickBack, x, 'Click Back')
 
                             if (!isContinue) {
-                                await killApps()
                                 await rest()
                                 continue mainLoop
                             }
@@ -1100,7 +1102,6 @@ async function main() {
                             isContinue = await checkCommand(claimNow, x, 'Click Claim Now')
 
                             if (!isContinue) {
-                                await killApps()
                                 await rest()
                                 continue mainLoop
                             }
