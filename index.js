@@ -871,7 +871,7 @@ async function main() {
             }
 
             const waveWallet = true;
-            if (waveWallet) {
+            if (waveWallet && x !== 21) {
                 const wavePage = await browser.newPage()
                 console.log(chalk.cyan(`\n[Bansos ${chalk.cyan('Wave💎')}]`))
                 // Goto Link
