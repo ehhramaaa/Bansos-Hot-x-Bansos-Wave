@@ -1002,9 +1002,9 @@ async function main() {
 
                 // Check Storage
                 const checkStorage = async (x) => {
-                    await iframe.waitForSelector('#section-transaction > div.direction-tab.flex.flex-col.items-center.gap-6.pt-4 > div.menu-block > div > div.menu_2.relative > div.menu_title.flex.flex-row.justify-between.items-center.absolute > div > span.time');
+                    await iframe.waitForSelector('#section-transaction > div.direction-tab.flex.flex-col.items-center.gap-6.pt-4 > div.menu-block > div > div.menu_1.relative > div.menu_title.flex.flex-row.justify-between.items-center.absolute > div > span.time');
                     storage = await iframe.evaluate(() => {
-                        const element = document.querySelector('#section-transaction > div.direction-tab.flex.flex-col.items-center.gap-6.pt-4 > div.menu-block > div > div.menu_2.relative > div.menu_title.flex.flex-row.justify-between.items-center.absolute > div > span.time');
+                        const element = document.querySelector('#section-transaction > div.direction-tab.flex.flex-col.items-center.gap-6.pt-4 > div.menu-block > div > div.menu_1.relative > div.menu_title.flex.flex-row.justify-between.items-center.absolute > div > span.time');
                         return parseFloat(element.textContent)
                     });
                 }
@@ -1029,9 +1029,9 @@ async function main() {
 
                     // Check Claim Time
                     const checkClaimTime = async (x) => {
-                        await iframe.waitForSelector('#section-transaction > div.direction-tab.flex.flex-col.items-center.gap-6.pt-4 > div.menu-block > div > div.menu_1.relative > div.menu_title.flex.flex-row.justify-between.items-center.absolute > div > span.time');
+                        await iframe.waitForSelector('#section-transaction > div.block-data.h-full > div > div.overlay.relative > div > div > div > div.ml-2.flex.flex-row.items-center.item.mt-2.mb-3 > span');
                         claimTime = await iframe.evaluate(() => {
-                            const element = document.querySelector('#section-transaction > div.direction-tab.flex.flex-col.items-center.gap-6.pt-4 > div.menu-block > div > div.menu_1.relative > div.menu_title.flex.flex-row.justify-between.items-center.absolute > div > span.time');
+                            const element = document.querySelector('#section-transaction > div.block-data.h-full > div > div.overlay.relative > div > div > div > div.ml-2.flex.flex-row.items-center.item.mt-2.mb-3 > span');
                             return parseFloat(element.textContent)
                         });
                     }
@@ -1043,7 +1043,7 @@ async function main() {
                         continue mainLoop
                     }
 
-                    prettyConsole(chalk.yellow(`Claim Countdown\t:${claimTime}`))
+                    prettyConsole(chalk.yellow(`Claim Countdown:${claimTime}`))
                 }
 
                 if (claim) {
