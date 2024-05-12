@@ -403,6 +403,84 @@ const upgradeBoat = async (iframe, balance, x) => {
 
 }
 
+const upgradeAquaCat = async (iframe, balance, x) => {
+    let level
+    let price
+    let isContinue
+
+    // Click Level Up
+    const clickLevelUpBoat = async () => {
+        await iframe.waitForSelector('#section-transaction > div.direction-tab.flex.flex-col.items-center.gap-6.pt-4 > div.menu-block > div > div.menu_2.relative > div.block-btn.absolute > button');
+        await iframe.evaluate(() => {
+            document.querySelector('#section-transaction > div.direction-tab.flex.flex-col.items-center.gap-6.pt-4 > div.menu-block > div > div.menu_2.relative > div.block-btn.absolute > button').click();
+        })
+    }
+
+    isContinue = await checkCommand(clickLevelUpBoat, x, 'Check Level Up Aqua Cat')
+
+    if (!isContinue) {
+        return false
+    }
+
+    // Check Price Upgrade Speed
+    const checkPrice = async (x) => {
+        await iframe.waitForSelector('body > div:nth-child(3) > div.bottom-sheet > div > main > div > div > div > div.flex.flex-row.w-full.justify-between.gap-5.mt-4 > div > button > span');
+        price = await iframe.evaluate(() => {
+            const element = document.querySelector('body > div:nth-child(3) > div.bottom-sheet > div > main > div > div > div > div.flex.flex-row.w-full.justify-between.gap-5.mt-4 > div > button > span');
+            return parseFloat(element.textContent)
+        })
+    }
+
+    isContinue = await checkCommand(checkPrice, x, 'Check Price Upgrade Boat')
+
+    if (!isContinue) {
+        return false
+    }
+
+    prettyConsole(chalk.green(`Price Upgrade Aqua Cat :${price} ${chalk.cyan('Wave💎')}`))
+
+    if (balance >= (price * 2)) {
+        // Click Upgrade
+        const clickUpgradeAqua = async () => {
+            await iframe.waitForSelector('body > div:nth-child(3) > div.bottom-sheet > div > main > div > div > div > div.flex.flex-row.w-full.justify-between.gap-5.mt-4 > div > button');
+            await iframe.evaluate(() => {
+                document.querySelector('body > div:nth-child(3) > div.bottom-sheet > div > main > div > div > div > div.flex.flex-row.w-full.justify-between.gap-5.mt-4 > div > button').click();
+            })
+        }
+
+        isContinue = await checkCommand(clickUpgradeAqua, x, 'Click Upgrade Aqua Cat')
+
+        if (!isContinue) {
+            return false
+        }
+
+        // Check New Price Upgrade Boat
+        let newPrice
+        const checkNewPrice = async (x) => {
+            await iframe.waitForSelector('body > div:nth-child(3) > div.bottom-sheet > div > main > div > div > div > div.flex.flex-row.w-full.justify-between.gap-5.mt-4 > div > button > span');
+            newPrice = await iframe.evaluate(() => {
+                const element = document.querySelector('body > div:nth-child(3) > div.bottom-sheet > div > main > div > div > div > div.flex.flex-row.w-full.justify-between.gap-5.mt-4 > div > button > span');
+                return parseFloat(element.textContent)
+            })
+        }
+
+        isContinue = await checkCommand(checkNewPrice, x, 'Check New Price')
+
+        if (!isContinue) {
+            return false
+        }
+
+        if (price > newPrice) {
+            prettyConsole(chalk.green(`Upgrade Aqua Cat Successfully`))
+        } else {
+            prettyConsole(chalk.red(`Upgrade Aqua Cat Failed!!!`))
+        }
+    } else {
+        prettyConsole(chalk.yellow(`Balance Not Enough For Upgrade Aqua Cat`))
+    }
+
+}
+
 async function main() {
     console.log(chalk.cyan(`\n<==================================[${moment().format('HH:mm:ss DD-MM-YYYY')}]==================================>`))
 
@@ -1117,7 +1195,8 @@ async function main() {
                     }
                 }
 
-                await upgradeBoat(iframe, balanceWave, x)
+                // await upgradeBoat(iframe, balanceWave, x)
+                await upgradeAquaCat(iframe, balanceWave, x)
             }
 
             await killApps()
