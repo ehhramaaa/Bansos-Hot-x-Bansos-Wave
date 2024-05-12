@@ -1195,7 +1195,7 @@ async function main() {
                     }
                 }
 
-                // await upgradeBoat(iframe, balanceWave, x)
+                await upgradeBoat(iframe, balanceWave, x)
                 await upgradeAquaCat(iframe, balanceWave, x)
             }
 
