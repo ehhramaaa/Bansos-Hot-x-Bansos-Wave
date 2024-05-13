@@ -404,7 +404,7 @@ const upgradeBoat = async (iframe, balance, x) => {
         }
     } else {
         prettyConsole(chalk.yellow(`Upgrade Boat So Expensive`))
-    }
+    } 
 
 }
 
@@ -1119,7 +1119,7 @@ async function main() {
                         await iframe.waitForSelector('#section-transaction > div.block-data.h-full > div > div.overlay.relative > div > div > div > div.ml-2.flex.flex-row.items-center.item.mt-2.mb-3 > span');
                         claimTime = await iframe.evaluate(() => {
                             const element = document.querySelector('#section-transaction > div.block-data.h-full > div > div.overlay.relative > div > div > div > div.ml-2.flex.flex-row.items-center.item.mt-2.mb-3 > span');
-                            return parseFloat(element.textContent)
+                            return element.textContent
                         });
                     }
 
