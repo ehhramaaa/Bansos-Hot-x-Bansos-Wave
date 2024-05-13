@@ -378,6 +378,8 @@ const upgradeBoat = async (iframe, balance, x) => {
                 return false
             }
 
+            await sleep(5000)
+
             // Check New Price Upgrade Boat
             let newPrice
             const checkNewPrice = async (x) => {
@@ -459,6 +461,8 @@ const upgradeAquaCat = async (iframe, balance, x) => {
             if (!isContinue) {
                 return false
             }
+            
+            await sleep(5000)
 
             // Check New Price Upgrade Boat
             let newPrice
