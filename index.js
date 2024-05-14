@@ -348,10 +348,12 @@ const upgradeBoat = async (iframe, balance, x) => {
 
     // Check Price Upgrade Boat
     const checkPrice = async (x) => {
-        await iframe.waitForSelector('body > div:nth-child(3) > div.bottom-sheet > div > main > div > div > div > div.flex.flex-row.w-full.justify-between.gap-5.mt-4 > div > button > span');
+        await iframe.waitForSelector('body > div:nth-child(4) > div.bottom-sheet > div > main > div > div > div > div.flex.flex-row.w-full.justify-between.gap-5.mt-4 > div > button > span');
+        console.log("test")
         price = await iframe.evaluate(() => {
-            const element = document.querySelector('body > div:nth-child(3) > div.bottom-sheet > div > main > div > div > div > div.flex.flex-row.w-full.justify-between.gap-5.mt-4 > div > button > span');
-            return parseFloat(element.textContent)
+            const element = document.querySelector('body > div:nth-child(4) > div.bottom-sheet > div > main > div > div > div > div.flex.flex-row.w-full.justify-between.gap-5.mt-4 > div > button > span');
+            console.log(element)
+            return element.textContent
         })
     }
 
@@ -617,7 +619,7 @@ async function main() {
             const page = await browser.newPage();
             await page.setDefaultNavigationTimeout(0);
 
-            const hotWallet = true;
+            const hotWallet = false;
 
             if (hotWallet) {
                 console.log(chalk.cyan(`\n[Bansos ${chalk.yellow('$HOT🔥')}]`))
@@ -1119,6 +1121,20 @@ async function main() {
 
                 await upgradeBoat(iframe, balanceWave, x)
                 await upgradeAquaCat(iframe, balanceWave, x)
+
+                // Click Overlay
+                const clickOverlay = async () => {
+                    await iframe.evaluate(() => {
+                        document.querySelector('body > div:nth-child(4) > div.bottom-sheet__overlay').click();
+                    });
+                }
+
+                isContinue = await checkCommand(clickOverlay, x, 'Click Overlay')
+
+                if (!isContinue) {
+                    await rest()
+                    continue mainLoop
+                }
 
                 let claim = false
 
