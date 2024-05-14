@@ -344,6 +344,8 @@ const upgradeBoat = async (iframe, balance, x) => {
         return false
     }
 
+    await sleep(3000)
+
     // Check Price Upgrade Boat
     const checkPrice = async (x) => {
         await iframe.waitForSelector('body > div:nth-child(3) > div.bottom-sheet > div > main > div > div > div > div.flex.flex-row.w-full.justify-between.gap-5.mt-4 > div > button > span');
@@ -360,6 +362,8 @@ const upgradeBoat = async (iframe, balance, x) => {
     }
 
     prettyConsole(chalk.green(`Price Upgrade Boat :${price} ${chalk.cyan('Wave💎')}`))
+
+    await sleep(3000)
 
 
     if (price < 200) {
@@ -429,6 +433,8 @@ const upgradeAquaCat = async (iframe, balance, x) => {
         return false
     }
 
+    await sleep(3000)
+
     // Check Price Upgrade Speed
     const checkPrice = async (x) => {
         await iframe.waitForSelector('body > div:nth-child(3) > div.bottom-sheet > div > main > div > div > div > div.flex.flex-row.w-full.justify-between.gap-5.mt-4 > div > button > span');
@@ -445,6 +451,8 @@ const upgradeAquaCat = async (iframe, balance, x) => {
     }
 
     prettyConsole(chalk.green(`Price Upgrade Aqua Cat :${price} ${chalk.cyan('Wave💎')}`))
+
+    await sleep(3000)
 
     if (price < 200) {
         if (balance >= (price * 2)) {
@@ -1109,6 +1117,9 @@ async function main() {
 
                 prettyConsole(chalk.green(`Max Storage\t:${storage} Hours`))
 
+                await upgradeBoat(iframe, balanceWave, x)
+                await upgradeAquaCat(iframe, balanceWave, x)
+
                 let claim = false
 
                 // Check Claim Button
@@ -1207,9 +1218,6 @@ async function main() {
                         prettyConsole(chalk.red("Claiming And Tweaking Failed!"))
                     }
                 }
-
-                await upgradeBoat(iframe, balanceWave, x)
-                await upgradeAquaCat(iframe, balanceWave, x)
             }
 
             await killApps()
