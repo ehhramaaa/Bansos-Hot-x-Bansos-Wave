@@ -425,7 +425,7 @@ const upgradeBoat = async (iframe, balance, x) => {
         }
     } else {
         prettyConsole(chalk.yellow(`Upgrade Boat So Expensive`))
-    } 
+    }
 
 }
 
@@ -484,7 +484,7 @@ const upgradeAquaCat = async (iframe, balance, x) => {
             if (!isContinue) {
                 return false
             }
-            
+
             await sleep(5000)
 
             // Check New Price Upgrade Boat
@@ -523,7 +523,7 @@ async function main() {
     const minute = Math.floor(Math.random() * (15 - 1 + 1)) + 1
     const ovpnConfig = await ovpnReadConfig(folderPath)
 
-    mainLoop: for (let x = 0; x <= 22; x++) {
+    mainLoop: for (let x = 22; x <= 22; x++) {
         if (x !== 0) {
             console.log(chalk.cyan(`\n<===============================================================================================================>`))
         }
@@ -571,7 +571,7 @@ async function main() {
             if (x === 22) {
                 const connectBrowser = async () => {
                     let launchOptions = {
-                        headless: true,
+                        headless: false,
                         args: [
                             `--user-data-dir=${chromeUserPath}`,
                             '--profile-directory=Profile 23'
@@ -987,9 +987,11 @@ async function main() {
             const waveWallet = true;
             if (waveWallet && x !== 21) {
                 const wavePage = await browser.newPage()
-                await page.setViewport({
-                    deviceScaleFactor: 0 // Device scale factor (pixel density)
-                  });
+                await wavePage.setViewport({
+                    width: 0, // Set width to 1200 pixels
+                    height: 0, // Set height to 800 pixels
+                    deviceScaleFactor: 1 // Device scale factor (pixel density)
+                });
                 console.log(chalk.cyan(`\n[Bansos ${chalk.cyan('Wave💎')}]`))
                 // Goto Link
                 const gotoLink = async () => {
