@@ -348,7 +348,7 @@ const upgradeBoat = async (iframe, balance, x) => {
 
     // Check Price Upgrade Boat
     try {
-        await iframe.waitForSelector('body > div:nth-child(3) > div.bottom-sheet > div > main > div > div > div > div.flex.flex-row.w-full.justify-between.gap-5.mt-4 > div > button > span');
+        await iframe.waitForSelector('body > div:nth-child(3) > div.bottom-sheet > div > main > div > div > div > div> div > button > span');
     } catch (e) {
         console.log(e)
     }
@@ -356,7 +356,7 @@ const upgradeBoat = async (iframe, balance, x) => {
     // Check Price Upgrade Boat
     try {
         price = await iframe.evaluate(() => {
-            const element = document.querySelector('body > div:nth-child(3) > div.bottom-sheet > div > main > div > div > div > div.flex.flex-row.w-full.justify-between.gap-5.mt-4 > div > button > span');
+            const element = document.querySelector('body > div:nth-child(3) > div.bottom-sheet > div > main > div > div > div > div > div > button > span');
             return parseFloat(element.textContent)
         })
     } catch (e) {
@@ -425,7 +425,7 @@ const upgradeBoat = async (iframe, balance, x) => {
         }
     } else {
         prettyConsole(chalk.yellow(`Upgrade Boat So Expensive`))
-    }
+    } 
 
 }
 
@@ -484,7 +484,7 @@ const upgradeAquaCat = async (iframe, balance, x) => {
             if (!isContinue) {
                 return false
             }
-
+            
             await sleep(5000)
 
             // Check New Price Upgrade Boat
@@ -523,7 +523,7 @@ async function main() {
     const minute = Math.floor(Math.random() * (15 - 1 + 1)) + 1
     const ovpnConfig = await ovpnReadConfig(folderPath)
 
-    mainLoop: for (let x = 22; x <= 22; x++) {
+    mainLoop: for (let x = 0; x <= 22; x++) {
         if (x !== 0) {
             console.log(chalk.cyan(`\n<===============================================================================================================>`))
         }
@@ -571,7 +571,7 @@ async function main() {
             if (x === 22) {
                 const connectBrowser = async () => {
                     let launchOptions = {
-                        headless: false,
+                        headless: true,
                         args: [
                             `--user-data-dir=${chromeUserPath}`,
                             '--profile-directory=Profile 23'
@@ -987,11 +987,6 @@ async function main() {
             const waveWallet = true;
             if (waveWallet && x !== 21) {
                 const wavePage = await browser.newPage()
-                await wavePage.setViewport({
-                    width: 500, // Set width to 1200 pixels
-                    height: 500, // Set height to 800 pixels
-                    deviceScaleFactor: 1 // Device scale factor (pixel density)
-                });
                 console.log(chalk.cyan(`\n[Bansos ${chalk.cyan('Wave💎')}]`))
                 // Goto Link
                 const gotoLink = async () => {
