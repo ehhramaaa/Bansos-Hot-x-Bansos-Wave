@@ -988,9 +988,7 @@ async function main() {
             if (waveWallet && x !== 21) {
                 const wavePage = await browser.newPage()
                 await wavePage.setViewport({
-                    width: 0, // Set width to 1200 pixels
-                    height: 0, // Set height to 800 pixels
-                    deviceScaleFactor: 0 // Device scale factor (pixel density)
+                    deviceScaleFactor: 2 // Device scale factor (pixel density)
                 });
                 console.log(chalk.cyan(`\n[Bansos ${chalk.cyan('Wave💎')}]`))
                 // Goto Link
