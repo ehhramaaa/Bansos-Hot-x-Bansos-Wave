@@ -618,7 +618,7 @@ async function main() {
             const page = await browser.newPage();
             await page.setDefaultNavigationTimeout(0);
 
-            const hotWallet = false;
+            const hotWallet = true;
 
             if (hotWallet) {
                 console.log(chalk.cyan(`\n[Bansos ${chalk.yellow('$HOT🔥')}]`))
