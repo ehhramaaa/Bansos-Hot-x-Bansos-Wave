@@ -347,6 +347,15 @@ const upgradeBoat = async (iframe, balance, x) => {
     await sleep(3000)
 
     // Check Price Upgrade Boat
+    try {
+        await iframe.waitForSelector('body > div:nth-child(3) > div.bottom-sheet > div > main > div > div > div > div.flex.flex-row.w-full.justify-between.gap-5.mt-4 > div > button > span');
+        price = await iframe.evaluate(() => {
+            const element = document.querySelector('body > div:nth-child(3) > div.bottom-sheet > div > main > div > div > div > div.flex.flex-row.w-full.justify-between.gap-5.mt-4 > div > button > span');
+            return parseFloat(element.textContent)
+        })
+    } catch (e) {
+        console.log(e)
+    }
     const checkPrice = async (x) => {
         await iframe.waitForSelector('body > div:nth-child(3) > div.bottom-sheet > div > main > div > div > div > div.flex.flex-row.w-full.justify-between.gap-5.mt-4 > div > button > span');
         price = await iframe.evaluate(() => {
@@ -355,11 +364,11 @@ const upgradeBoat = async (iframe, balance, x) => {
         })
     }
 
-    isContinue = await checkCommand(checkPrice, x, 'Check Price Upgrade Boat')
+    // isContinue = await checkCommand(checkPrice, x, 'Check Price Upgrade Boat')
 
-    if (!isContinue) {
-        return false
-    }
+    // if (!isContinue) {
+    //     return false
+    // }
 
     prettyConsole(chalk.green(`Price Upgrade Boat :${price} ${chalk.cyan('Wave💎')}`))
 
