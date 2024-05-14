@@ -348,7 +348,7 @@ const upgradeBoat = async (iframe, balance, x) => {
 
     // Check Price Upgrade Boat
     try {
-        await iframe.waitForSelector('body > div:nth-child(3) > div.bottom-sheet > div > main > div > div > div > div> div > button > span');
+        await iframe.waitForSelector('body > div:nth-child(4) > div.bottom-sheet > div > main > div > div > div > div:nth-child(3)  > div > button > span');
     } catch (e) {
         console.log(e)
     }
@@ -356,7 +356,7 @@ const upgradeBoat = async (iframe, balance, x) => {
     // Check Price Upgrade Boat
     try {
         price = await iframe.evaluate(() => {
-            const element = document.querySelector('body > div:nth-child(3) > div.bottom-sheet > div > main > div > div > div > div > div > button > span');
+            const element = document.querySelector('body > div:nth-child(4) > div.bottom-sheet > div > main > div > div > div > div:nth-child(3)  > div > button > span');
             return parseFloat(element.textContent)
         })
     } catch (e) {
@@ -523,7 +523,7 @@ async function main() {
     const minute = Math.floor(Math.random() * (15 - 1 + 1)) + 1
     const ovpnConfig = await ovpnReadConfig(folderPath)
 
-    mainLoop: for (let x = 0; x <= 22; x++) {
+    mainLoop: for (let x = 22; x <= 22; x++) {
         if (x !== 0) {
             console.log(chalk.cyan(`\n<===============================================================================================================>`))
         }
@@ -571,7 +571,7 @@ async function main() {
             if (x === 22) {
                 const connectBrowser = async () => {
                     let launchOptions = {
-                        headless: true,
+                        headless: false,
                         args: [
                             `--user-data-dir=${chromeUserPath}`,
                             '--profile-directory=Profile 23'
@@ -598,7 +598,7 @@ async function main() {
             } else {
                 const connectBrowser = async () => {
                     let launchOptions = {
-                        headless: false,
+                        headless: true,
                         args: [
                             `--user-data-dir=${chromeUserPath}`,
                             x === 0 ? '--profile-directory=Default' : `--profile-directory=Profile ${x}`
