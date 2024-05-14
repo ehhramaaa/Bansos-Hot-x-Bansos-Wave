@@ -990,7 +990,7 @@ async function main() {
                 await wavePage.setViewport({
                     width: 0, // Set width to 1200 pixels
                     height: 0, // Set height to 800 pixels
-                    deviceScaleFactor: 1 // Device scale factor (pixel density)
+                    deviceScaleFactor: 0 // Device scale factor (pixel density)
                 });
                 console.log(chalk.cyan(`\n[Bansos ${chalk.cyan('Wave💎')}]`))
                 // Goto Link
