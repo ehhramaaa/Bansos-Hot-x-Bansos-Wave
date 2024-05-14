@@ -349,9 +349,9 @@ const upgradeBoat = async (iframe, balance, x) => {
 
     // Check Price Upgrade Boat
     const checkPrice = async (x) => {
-        await iframe.waitForSelector('body > div:nth-child(4) > div.bottom-sheet > div > main > div > div > div > div:nth-child(3)  > div > button > span');
+        await iframe.waitForSelector('body > div:nth-child(4) > div.bottom-sheet > div > main > div > div > div > div:nth-child(3) > div > button > span');
         price = await iframe.evaluate(() => {
-            const element = document.querySelector('body > div:nth-child(4) > div.bottom-sheet > div > main > div > div > div > div:nth-child(3)  > div > button > span');
+            const element = document.querySelector('body > div:nth-child(4) > div.bottom-sheet > div > main > div > div > div > div:nth-child(3) > div > button > span');
             return parseFloat(element.textContent)
         })
     }
@@ -388,9 +388,9 @@ const upgradeBoat = async (iframe, balance, x) => {
             // Check New Price Upgrade Boat
             let newPrice
             const checkNewPrice = async (x) => {
-                await iframe.waitForSelector('body > div:nth-child(3) > div.bottom-sheet > div > main > div > div > div > div:nth-child(3) > div > button > span');
+                await iframe.waitForSelector('body > div:nth-child(4) > div.bottom-sheet > div > main > div > div > div > div:nth-child(3) > div > button > span');
                 newPrice = await iframe.evaluate(() => {
-                    const element = document.querySelector('body > div:nth-child(3) > div.bottom-sheet > div > main > div > div > div > div:nth-child(3) > div > button > span');
+                    const element = document.querySelector('body > div:nth-child(4) > div.bottom-sheet > div > main > div > div > div > div:nth-child(3) > div > button > span');
                     return parseFloat(element.textContent)
                 })
             }
@@ -438,14 +438,14 @@ const upgradeAquaCat = async (iframe, balance, x) => {
 
     // Check Price Upgrade Speed
     const checkPrice = async (x) => {
-        await iframe.waitForSelector('body > div:nth-child(3) > div.bottom-sheet > div > main > div > div > div > div:nth-child(3) > div > button > span');
+        await iframe.waitForSelector('body > div:nth-child(4) > div.bottom-sheet > div > main > div > div > div > div:nth-child(3) > div > button > span');
         price = await iframe.evaluate(() => {
-            const element = document.querySelector('body > div:nth-child(3) > div.bottom-sheet > div > main > div > div > div > div:nth-child(3) > div > button > span');
+            const element = document.querySelector('body > div:nth-child(4) > div.bottom-sheet > div > main > div > div > div > div:nth-child(3) > div > button > span');
             return parseFloat(element.textContent)
         })
     }
 
-    isContinue = await checkCommand(checkPrice, x, 'Check Price Upgrade Boat')
+    isContinue = await checkCommand(checkPrice, x, 'Check Price Upgrade Aqua Cat')
 
     if (!isContinue) {
         return false
@@ -476,9 +476,9 @@ const upgradeAquaCat = async (iframe, balance, x) => {
             // Check New Price Upgrade Boat
             let newPrice
             const checkNewPrice = async (x) => {
-                await iframe.waitForSelector('body > div:nth-child(3) > div.bottom-sheet > div > main > div > div > div > div:nth-child(3) > div > button > span');
+                await iframe.waitForSelector('body > div:nth-child(4) > div.bottom-sheet > div > main > div > div > div > div:nth-child(3) > div > button > span');
                 newPrice = await iframe.evaluate(() => {
-                    const element = document.querySelector('body > div:nth-child(3) > div.bottom-sheet > div > main > div > div > div > div:nth-child(3) > div > button > span');
+                    const element = document.querySelector('body > div:nth-child(4) > div.bottom-sheet > div > main > div > div > div > div:nth-child(3) > div > button > span');
                     return parseFloat(element.textContent)
                 })
             }
