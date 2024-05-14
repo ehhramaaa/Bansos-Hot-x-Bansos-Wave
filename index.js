@@ -346,35 +346,21 @@ const upgradeBoat = async (iframe, balance, x) => {
 
     await sleep(3000)
 
-    // Check Price Upgrade Boat
-    try {
-        await iframe.waitForSelector('body > div:nth-child(4) > div.bottom-sheet > div > main > div > div > div > div:nth-child(3)  > div > button > span');
-    } catch (e) {
-        console.log(e)
-    }
 
     // Check Price Upgrade Boat
-    try {
+    const checkPrice = async (x) => {
+        await iframe.waitForSelector('body > div:nth-child(4) > div.bottom-sheet > div > main > div > div > div > div:nth-child(3)  > div > button > span');
         price = await iframe.evaluate(() => {
             const element = document.querySelector('body > div:nth-child(4) > div.bottom-sheet > div > main > div > div > div > div:nth-child(3)  > div > button > span');
             return parseFloat(element.textContent)
         })
-    } catch (e) {
-        console.log(e)
-    }
-    const checkPrice = async (x) => {
-        await iframe.waitForSelector('body > div:nth-child(3) > div.bottom-sheet > div > main > div > div > div > div.flex.flex-row.w-full.justify-between.gap-5.mt-4 > div > button > span');
-        price = await iframe.evaluate(() => {
-            const element = document.querySelector('body > div:nth-child(3) > div.bottom-sheet > div > main > div > div > div > div.flex.flex-row.w-full.justify-between.gap-5.mt-4 > div > button > span');
-            return parseFloat(element.textContent)
-        })
     }
 
-    // isContinue = await checkCommand(checkPrice, x, 'Check Price Upgrade Boat')
+    isContinue = await checkCommand(checkPrice, x, 'Check Price Upgrade Boat')
 
-    // if (!isContinue) {
-    //     return false
-    // }
+    if (!isContinue) {
+        return false
+    }
 
     prettyConsole(chalk.green(`Price Upgrade Boat :${price} ${chalk.cyan('Wave💎')}`))
 
@@ -385,9 +371,9 @@ const upgradeBoat = async (iframe, balance, x) => {
         if (balance >= (price * 2)) {
             // Click Upgrade
             const clickUpgradeBoat = async () => {
-                await iframe.waitForSelector('body > div:nth-child(3) > div.bottom-sheet > div > main > div > div > div > div.flex.flex-row.w-full.justify-between.gap-5.mt-4 > div > button');
+                await iframe.waitForSelector('body > div:nth-child(3) > div.bottom-sheet > div > main > div > div > div > div:nth-child(3) > div > button');
                 await iframe.evaluate(() => {
-                    document.querySelector('body > div:nth-child(3) > div.bottom-sheet > div > main > div > div > div > div.flex.flex-row.w-full.justify-between.gap-5.mt-4 > div > button').click();
+                    document.querySelector('body > div:nth-child(3) > div.bottom-sheet > div > main > div > div > div > div:nth-child(3) > div > button').click();
                 })
             }
 
@@ -402,9 +388,9 @@ const upgradeBoat = async (iframe, balance, x) => {
             // Check New Price Upgrade Boat
             let newPrice
             const checkNewPrice = async (x) => {
-                await iframe.waitForSelector('body > div:nth-child(3) > div.bottom-sheet > div > main > div > div > div > div.flex.flex-row.w-full.justify-between.gap-5.mt-4 > div > button > span');
+                await iframe.waitForSelector('body > div:nth-child(3) > div.bottom-sheet > div > main > div > div > div > div:nth-child(3) > div > button > span');
                 newPrice = await iframe.evaluate(() => {
-                    const element = document.querySelector('body > div:nth-child(3) > div.bottom-sheet > div > main > div > div > div > div.flex.flex-row.w-full.justify-between.gap-5.mt-4 > div > button > span');
+                    const element = document.querySelector('body > div:nth-child(3) > div.bottom-sheet > div > main > div > div > div > div:nth-child(3) > div > button > span');
                     return parseFloat(element.textContent)
                 })
             }
@@ -452,9 +438,9 @@ const upgradeAquaCat = async (iframe, balance, x) => {
 
     // Check Price Upgrade Speed
     const checkPrice = async (x) => {
-        await iframe.waitForSelector('body > div:nth-child(3) > div.bottom-sheet > div > main > div > div > div > div.flex.flex-row.w-full.justify-between.gap-5.mt-4 > div > button > span');
+        await iframe.waitForSelector('body > div:nth-child(3) > div.bottom-sheet > div > main > div > div > div > div:nth-child(3) > div > button > span');
         price = await iframe.evaluate(() => {
-            const element = document.querySelector('body > div:nth-child(3) > div.bottom-sheet > div > main > div > div > div > div.flex.flex-row.w-full.justify-between.gap-5.mt-4 > div > button > span');
+            const element = document.querySelector('body > div:nth-child(3) > div.bottom-sheet > div > main > div > div > div > div:nth-child(3) > div > button > span');
             return parseFloat(element.textContent)
         })
     }
@@ -473,9 +459,9 @@ const upgradeAquaCat = async (iframe, balance, x) => {
         if (balance >= (price * 2)) {
             // Click Upgrade
             const clickUpgradeAqua = async () => {
-                await iframe.waitForSelector('body > div:nth-child(3) > div.bottom-sheet > div > main > div > div > div > div.flex.flex-row.w-full.justify-between.gap-5.mt-4 > div > button');
+                await iframe.waitForSelector('body > div:nth-child(3) > div.bottom-sheet > div > main > div > div > div > div:nth-child(3) > div > button');
                 await iframe.evaluate(() => {
-                    document.querySelector('body > div:nth-child(3) > div.bottom-sheet > div > main > div > div > div > div.flex.flex-row.w-full.justify-between.gap-5.mt-4 > div > button').click();
+                    document.querySelector('body > div:nth-child(3) > div.bottom-sheet > div > main > div > div > div > div:nth-child(3) > div > button').click();
                 })
             }
 
@@ -490,9 +476,9 @@ const upgradeAquaCat = async (iframe, balance, x) => {
             // Check New Price Upgrade Boat
             let newPrice
             const checkNewPrice = async (x) => {
-                await iframe.waitForSelector('body > div:nth-child(3) > div.bottom-sheet > div > main > div > div > div > div.flex.flex-row.w-full.justify-between.gap-5.mt-4 > div > button > span');
+                await iframe.waitForSelector('body > div:nth-child(3) > div.bottom-sheet > div > main > div > div > div > div:nth-child(3) > div > button > span');
                 newPrice = await iframe.evaluate(() => {
-                    const element = document.querySelector('body > div:nth-child(3) > div.bottom-sheet > div > main > div > div > div > div.flex.flex-row.w-full.justify-between.gap-5.mt-4 > div > button > span');
+                    const element = document.querySelector('body > div:nth-child(3) > div.bottom-sheet > div > main > div > div > div > div:nth-child(3) > div > button > span');
                     return parseFloat(element.textContent)
                 })
             }
@@ -523,7 +509,7 @@ async function main() {
     const minute = Math.floor(Math.random() * (15 - 1 + 1)) + 1
     const ovpnConfig = await ovpnReadConfig(folderPath)
 
-    mainLoop: for (let x = 22; x <= 22; x++) {
+    mainLoop: for (let x = 0; x <= 22; x++) {
         if (x !== 0) {
             console.log(chalk.cyan(`\n<===============================================================================================================>`))
         }
@@ -571,7 +557,7 @@ async function main() {
             if (x === 22) {
                 const connectBrowser = async () => {
                     let launchOptions = {
-                        headless: false,
+                        headless: true,
                         args: [
                             `--user-data-dir=${chromeUserPath}`,
                             '--profile-directory=Profile 23'
