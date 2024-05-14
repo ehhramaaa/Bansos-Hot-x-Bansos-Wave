@@ -348,12 +348,10 @@ const upgradeBoat = async (iframe, balance, x) => {
 
     // Check Price Upgrade Boat
     const checkPrice = async (x) => {
-        await iframe.waitForSelector('body > div:nth-child(4) > div.bottom-sheet > div > main > div > div > div > div.flex.flex-row.w-full.justify-between.gap-5.mt-4 > div > button > span');
-        console.log("test")
+        await iframe.waitForSelector('body > div:nth-child(3) > div.bottom-sheet > div > main > div > div > div > div.flex.flex-row.w-full.justify-between.gap-5.mt-4 > div > button > span');
         price = await iframe.evaluate(() => {
-            const element = document.querySelector('body > div:nth-child(4) > div.bottom-sheet > div > main > div > div > div > div.flex.flex-row.w-full.justify-between.gap-5.mt-4 > div > button > span');
-            console.log(element)
-            return element.textContent
+            const element = document.querySelector('body > div:nth-child(3) > div.bottom-sheet > div > main > div > div > div > div.flex.flex-row.w-full.justify-between.gap-5.mt-4 > div > button > span');
+            return parseFloat(element.textContent)
         })
     }
 
@@ -585,7 +583,7 @@ async function main() {
             } else {
                 const connectBrowser = async () => {
                     let launchOptions = {
-                        headless: false,
+                        headless: true,
                         args: [
                             `--user-data-dir=${chromeUserPath}`,
                             x === 0 ? '--profile-directory=Default' : `--profile-directory=Profile ${x}`
@@ -1119,23 +1117,6 @@ async function main() {
 
                 prettyConsole(chalk.green(`Max Storage\t:${storage} Hours`))
 
-                await upgradeBoat(iframe, balanceWave, x)
-                await upgradeAquaCat(iframe, balanceWave, x)
-
-                // Click Overlay
-                const clickOverlay = async () => {
-                    await iframe.evaluate(() => {
-                        document.querySelector('body > div:nth-child(4) > div.bottom-sheet__overlay').click();
-                    });
-                }
-
-                isContinue = await checkCommand(clickOverlay, x, 'Click Overlay')
-
-                if (!isContinue) {
-                    await rest()
-                    continue mainLoop
-                }
-
                 let claim = false
 
                 // Check Claim Button
@@ -1234,6 +1215,9 @@ async function main() {
                         prettyConsole(chalk.red("Claiming And Tweaking Failed!"))
                     }
                 }
+
+                await upgradeBoat(iframe, balanceWave, x)
+                await upgradeAquaCat(iframe, balanceWave, x)
             }
 
             await killApps()
