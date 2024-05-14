@@ -349,6 +349,12 @@ const upgradeBoat = async (iframe, balance, x) => {
     // Check Price Upgrade Boat
     try {
         await iframe.waitForSelector('body > div:nth-child(3) > div.bottom-sheet > div > main > div > div > div > div.flex.flex-row.w-full.justify-between.gap-5.mt-4 > div > button > span');
+    } catch (e) {
+        console.log(e)
+    }
+
+    // Check Price Upgrade Boat
+    try {
         price = await iframe.evaluate(() => {
             const element = document.querySelector('body > div:nth-child(3) > div.bottom-sheet > div > main > div > div > div > div.flex.flex-row.w-full.justify-between.gap-5.mt-4 > div > button > span');
             return parseFloat(element.textContent)
@@ -1130,7 +1136,7 @@ async function main() {
 
                 // Check Claim Button
                 try {
-                    await iframe.waitForSelector('#section-transaction > div.block-data.h-full > div > div.overlay.relative > div > div > div > div.flex.flex-row.items-center.item-2.mt-2.mb-3 > div > div');
+                    await iframe.waitForSelector('#section-transaction > div.block-data.h-full > div > div.overlay.relative > div > div > div > div.flex.flex-row.items-center.item-2.mt-2.mb-3 > div > div', { timeout: 5000 });
                     claim = true
                 } catch (error) {
                     let claimTime
