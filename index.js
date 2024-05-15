@@ -798,7 +798,7 @@ async function main() {
 
                     // Claim $HOT🔥
                     do {
-                        if (reClaim <= 5) {
+                        if (reClaim <= 3) {
                             // Click Claim
                             const clickClaim = async (x) => {
                                 const claimSelector = '#root > div > div > div:nth-child(3) > div > div:nth-child(3) > div > div:nth-child(2) > div:nth-child(3) > button'
@@ -858,12 +858,10 @@ async function main() {
 
                                     await checkCommand(clickBoost, x, 'Click Boost')
 
-                                    await sleep(5000)
-
-                                    tweak = false
+                                    await sleep(3000)
 
                                     // Click Back
-                                    const clickBack = async (x) => {
+                                    const clickBack = async () => {
                                         await page.waitForSelector('.btn-icon.popup-close');
                                         await page.click('.btn-icon.popup-close');
                                     }
@@ -875,10 +873,8 @@ async function main() {
                                     makeSure = true
                                 }
                             } while (makeSure === false)
-
-                            balance = balanceAfter
                         } else {
-                            prettyConsole(chalk.red(`After Reclaim ${reClaim}x Still Not Claimed, Switch To Upgrade`))
+                            prettyConsole(chalk.red(`After Reclaim ${reClaim}x Still Not Claimed`))
                             claimed = true
                         }
                     } while (claimed === false)
