@@ -627,11 +627,7 @@ async function main() {
                     await page.goto('https://web.telegram.org/k/#@herewalletbot', { waitUntil: ['networkidle2', 'domcontentloaded'] });
                 }
 
-                isContinue = await checkCommand(gotoLink, x, 'Goto Link')
-
-                if (!isContinue) {
-                    break
-                }
+                await checkCommand(gotoLink, x, 'Goto Link')
 
                 await sleep(3000)
 
@@ -642,11 +638,7 @@ async function main() {
                     await page.click('a.anchor-url[href="https://t.me/herewalletbot/app"]')
                 }
 
-                isContinue = await checkCommand(claimNow, x, 'Click Claim Now')
-
-                if (!isContinue) {
-                    break
-                }
+                await checkCommand(claimNow, x, 'Click Claim Now')
 
                 await sleep(3000)
 
@@ -657,11 +649,7 @@ async function main() {
                     await page.click('body > div.popup.popup-peer.popup-confirmation.active > div > div.popup-buttons > button:nth-child(1)')
                 }
 
-                isContinue = await checkCommand(buttonLaunch, x, 'Click Button Launch')
-
-                if (!isContinue) {
-                    break
-                }
+                await checkCommand(buttonLaunch, x, 'Click Button Launch')
 
                 await sleep(3000)
 
@@ -673,11 +661,7 @@ async function main() {
                     iframeElementHandle = await page.$(iframeSelector);
                 }
 
-                isContinue = await checkCommand(handleFrame, x, 'Handle iframe')
-
-                if (!isContinue) {
-                    break
-                }
+                await checkCommand(handleFrame, x, 'Handle iframe')
 
                 await sleep(3000)
 
@@ -694,11 +678,7 @@ async function main() {
                     })
                 }
 
-                isContinue = await checkCommand(getAccountName, x, 'Get Account Name')
-
-                if (!isContinue) {
-                    break
-                }
+                await checkCommand(getAccountName, x, 'Get Account Name')
 
                 prettyConsole(chalk.green(`Account\t:${account}`))
 
@@ -728,11 +708,7 @@ async function main() {
                     });
                 }
 
-                isContinue = await checkCommand(checkBalance, x, 'Check Balance')
-
-                if (!isContinue) {
-                    break
-                }
+                await checkCommand(checkBalance, x, 'Check Balance')
 
                 prettyConsole(chalk.green(`Balance\t:${balance} ${chalk.yellow('$HOT🔥')}`))
 
@@ -751,11 +727,7 @@ async function main() {
                     });
                 }
 
-                isContinue = await checkCommand(checkStorage, x, 'Check Storage')
-
-                if (!isContinue) {
-                    break
-                }
+                await checkCommand(checkStorage, x, 'Check Storage')
 
                 prettyConsole(chalk.green(`Storage\t:${storage}%`))
 
@@ -767,11 +739,7 @@ async function main() {
                     });
                 }
 
-                isContinue = await checkCommand(clickStorage, x, 'Click Storage')
-
-                if (!isContinue) {
-                    break
-                }
+                await checkCommand(clickStorage, x, 'Click Storage')
 
                 if (storage >= threshold) {
                     // Click Gas
@@ -782,11 +750,7 @@ async function main() {
                         });
                     }
 
-                    isContinue = await checkCommand(clickGas, x, 'Click Gas')
-
-                    if (!isContinue) {
-                        break
-                    }
+                    await checkCommand(clickGas, x, 'Click Gas')
 
                     // Click Tab Gas
                     const tabGas = async (x) => {
@@ -796,11 +760,7 @@ async function main() {
                         });
                     }
 
-                    isContinue = await checkCommand(tabGas, x, 'Click Tab Gas')
-
-                    if (!isContinue) {
-                        break
-                    }
+                    await checkCommand(tabGas, x, 'Click Tab Gas')
 
                     // Wait For Counting Gas Amount
                     await sleep(10000)
@@ -816,11 +776,7 @@ async function main() {
                         });
                     }
 
-                    isContinue = await checkCommand(checkGas, x, 'Check Gas Free Amount')
-
-                    if (!isContinue) {
-                        break
-                    }
+                    await checkCommand(checkGas, x, 'Check Gas Free Amount')
 
                     prettyConsole(chalk.green(`Gas Free\t:${gasFree}`))
 
@@ -830,18 +786,10 @@ async function main() {
                         await page.click('.popup-close');
                     }
 
-                    isContinue = await checkCommand(clickBack, x, 'Click Back')
-
-                    if (!isContinue) {
-                        break
-                    }
+                    await checkCommand(clickBack, x, 'Click Back')
 
                     // Click Storage
-                    isContinue = await checkCommand(clickStorage, x, 'Click Storage')
-
-                    if (!isContinue) {
-                        break
-                    }
+                    await checkCommand(clickStorage, x, 'Click Storage')
 
                     await sleep(3000)
 
@@ -908,11 +856,7 @@ async function main() {
                                         })
                                     }
 
-                                    isContinue = await checkCommand(clickBoost, x, 'Click Boost')
-
-                                    if (!isContinue) {
-                                        break
-                                    }
+                                    await checkCommand(clickBoost, x, 'Click Boost')
 
                                     await sleep(5000)
 
@@ -924,11 +868,7 @@ async function main() {
                                         await page.click('.btn-icon.popup-close');
                                     }
 
-                                    isContinue = await checkCommand(clickBack, x, 'Click Back')
-
-                                    if (!isContinue) {
-                                        break
-                                    }
+                                    await checkCommand(clickBack, x, 'Click Back')
 
                                     prettyConsole(chalk.red(`Try To Re-Claim ${chalk.yellow('$HOT🔥')}`))
                                     reClaim++
