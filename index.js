@@ -830,7 +830,7 @@ async function main() {
 
                                     await sleep(5000)
 
-                                    if (checkCommand === 5) {
+                                    if (tryMakeSure === 5) {
                                         prettyConsole(chalk.yellow(`Still Claiming ${chalk.yellow('$HOT🔥')}`))
                                     }
 
