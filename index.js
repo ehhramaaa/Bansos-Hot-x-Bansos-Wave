@@ -794,7 +794,6 @@ async function main() {
                     await sleep(3000)
 
                     let claimed = false
-                    let tweak = false
 
                     // Claim $HOT🔥
                     do {
@@ -845,36 +844,9 @@ async function main() {
                                 }
                             } else {
                                 // Tweak if not claimed with clicking boost
-                                prettyConsole(chalk.red(`Claiming ${chalk.yellow('$HOT🔥')} So Take Long Time, Tweaking`))
-
-                                // Click Boost
-                                const clickBoost = async (x) => {
-                                    await iframe.waitForSelector('#root > div > div > div:nth-child(3) > div > div:nth-child(4) > div > div:nth-child(3)');
-                                    account = await iframe.evaluate(() => {
-                                        document.querySelector('#root > div > div > div:nth-child(3) > div > div:nth-child(4) > div > div:nth-child(3)').click();
-                                    })
-                                }
-
-                                await checkCommand(clickBoost, x, 'Click Boost')
-
-                                await sleep(3000)
-
-                                // Click Back
-                                const clickBack = async () => {
-                                    await page.waitForSelector('.btn-icon.popup-close');
-                                    await page.click('.btn-icon.popup-close');
-                                }
-
-                                await checkCommand(clickBack, x, 'Click Back')
-
-                                prettyConsole(chalk.red(`Try To Re-Claim ${chalk.yellow('$HOT🔥')}`))
+                                prettyConsole(chalk.red(`Failed Claiming ${chalk.yellow('$HOT🔥')} !!!`))
                                 makeSure = true
-
-                                if (tweak) {
-                                    claimed = true
-                                }
-                                
-                                tweak = true
+                                claimed = true
                             }
                         } while (makeSure === false)
                     } while (claimed === false)
