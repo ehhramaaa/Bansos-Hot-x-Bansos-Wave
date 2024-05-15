@@ -371,9 +371,9 @@ const upgradeBoat = async (iframe, balance, x) => {
         if (balance >= (price * 2)) {
             // Click Upgrade
             const clickUpgradeBoat = async () => {
-                await iframe.waitForSelector('body > div:nth-child(3) > div.bottom-sheet > div > main > div > div > div > div:nth-child(3) > div > button');
+                await iframe.waitForSelector('body > div:nth-child(4) > div.bottom-sheet > div > main > div > div > div > div:nth-child(3) > div > button');
                 await iframe.evaluate(() => {
-                    document.querySelector('body > div:nth-child(3) > div.bottom-sheet > div > main > div > div > div > div:nth-child(3) > div > button').click();
+                    document.querySelector('body > div:nth-child(4) > div.bottom-sheet > div > main > div > div > div > div:nth-child(3) > div > button').click();
                 })
             }
 
@@ -459,9 +459,9 @@ const upgradeAquaCat = async (iframe, balance, x) => {
         if (balance >= (price * 2)) {
             // Click Upgrade
             const clickUpgradeAqua = async () => {
-                await iframe.waitForSelector('body > div:nth-child(3) > div.bottom-sheet > div > main > div > div > div > div:nth-child(3) > div > button');
+                await iframe.waitForSelector('body > div:nth-child(4) > div.bottom-sheet > div > main > div > div > div > div:nth-child(3) > div > button');
                 await iframe.evaluate(() => {
-                    document.querySelector('body > div:nth-child(3) > div.bottom-sheet > div > main > div > div > div > div:nth-child(3) > div > button').click();
+                    document.querySelector('body > div:nth-child(4) > div.bottom-sheet > div > main > div > div > div > div:nth-child(3) > div > button').click();
                 })
             }
 
