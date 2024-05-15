@@ -411,7 +411,7 @@ const upgradeBoat = async (iframe, balance, x) => {
         }
     } else {
         prettyConsole(chalk.yellow(`Upgrade Boat So Expensive`))
-    } 
+    }
 
 }
 
@@ -470,7 +470,7 @@ const upgradeAquaCat = async (iframe, balance, x) => {
             if (!isContinue) {
                 return false
             }
-            
+
             await sleep(5000)
 
             // Check New Price Upgrade Boat
@@ -794,89 +794,89 @@ async function main() {
                     await sleep(3000)
 
                     let claimed = false
-                    let reClaim = 0
+                    let tweak = false
 
                     // Claim $HOT🔥
                     do {
-                        if (reClaim <= 3) {
-                            // Click Claim
-                            const clickClaim = async (x) => {
-                                const claimSelector = '#root > div > div > div:nth-child(3) > div > div:nth-child(3) > div > div:nth-child(2) > div:nth-child(3) > button'
-                                await iframe.waitForSelector(claimSelector);
-                                await iframe.evaluate((selector) => {
-                                    document.querySelector(selector).click();
-                                }, claimSelector);
-                            }
-
-                            await checkCommand(clickClaim, x, 'Click Claim')
-
-                            prettyConsole(chalk.green(`Claiming ${chalk.yellow('$HOT🔥')}`))
-
-                            let balanceAfter = 0
-                            let makeSure = false
-                            let tryMakeSure = 0
-
-                            // Check Balance After Claim And Reclaim If Not Claimed
-                            do {
-                                if (tryMakeSure <= 5) {
-                                    if (balanceAfter <= balance) {
-                                        try {
-                                            // Check balance for makesure is claimed
-                                            balanceAfter = await iframe.evaluate(() => {
-                                                const element = document.querySelector('#root > div > div > div:nth-child(3) > div > div:nth-child(2) > div:nth-child(4) > p:nth-child(3)');
-                                                return parseFloat(element.textContent);
-                                            });
-                                        } catch (error) {
-                                            prettyConsole(chalk.red(error.message))
-                                        }
-
-                                        await sleep(5000)
-
-                                        if (checkCommand === 5) {
-                                            prettyConsole(chalk.yellow(`Still Claiming ${chalk.yellow('$HOT🔥')}`))
-                                        }
-
-
-                                        tryMakeSure++
-                                    } else {
-                                        prettyConsole(chalk.green(`Claim ${chalk.yellow('$HOT🔥')} Successfully!`))
-                                        prettyConsole(chalk.green(`Update Balance\t:${balanceAfter} ${chalk.yellow('$HOT🔥')}`))
-                                        makeSure = true
-                                        claimed = true
-                                    }
-                                } else {
-                                    // Tweak if not claimed with clicking boost
-                                    prettyConsole(chalk.red(`Claiming ${chalk.yellow('$HOT🔥')} So Take Long Time, Tweaking`))
-
-                                    // Click Boost
-                                    const clickBoost = async (x) => {
-                                        await iframe.waitForSelector('#root > div > div > div:nth-child(3) > div > div:nth-child(4) > div > div:nth-child(3)');
-                                        account = await iframe.evaluate(() => {
-                                            document.querySelector('#root > div > div > div:nth-child(3) > div > div:nth-child(4) > div > div:nth-child(3)').click();
-                                        })
-                                    }
-
-                                    await checkCommand(clickBoost, x, 'Click Boost')
-
-                                    await sleep(3000)
-
-                                    // Click Back
-                                    const clickBack = async () => {
-                                        await page.waitForSelector('.btn-icon.popup-close');
-                                        await page.click('.btn-icon.popup-close');
-                                    }
-
-                                    await checkCommand(clickBack, x, 'Click Back')
-
-                                    prettyConsole(chalk.red(`Try To Re-Claim ${chalk.yellow('$HOT🔥')}`))
-                                    reClaim++
-                                    makeSure = true
-                                }
-                            } while (makeSure === false)
-                        } else {
-                            prettyConsole(chalk.red(`After Reclaim ${reClaim}x Still Not Claimed`))
-                            claimed = true
+                        // Click Claim
+                        const clickClaim = async (x) => {
+                            const claimSelector = '#root > div > div > div:nth-child(3) > div > div:nth-child(3) > div > div:nth-child(2) > div:nth-child(3) > button'
+                            await iframe.waitForSelector(claimSelector);
+                            await iframe.evaluate((selector) => {
+                                document.querySelector(selector).click();
+                            }, claimSelector);
                         }
+
+                        await checkCommand(clickClaim, x, 'Click Claim')
+
+                        prettyConsole(chalk.green(`Claiming ${chalk.yellow('$HOT🔥')}`))
+
+                        let balanceAfter = 0
+                        let makeSure = false
+                        let tryMakeSure = 0
+
+                        // Check Balance After Claim And Reclaim If Not Claimed
+                        do {
+                            if (tryMakeSure <= 5) {
+                                if (balanceAfter <= balance) {
+                                    try {
+                                        // Check balance for makesure is claimed
+                                        balanceAfter = await iframe.evaluate(() => {
+                                            const element = document.querySelector('#root > div > div > div:nth-child(3) > div > div:nth-child(2) > div:nth-child(4) > p:nth-child(3)');
+                                            return parseFloat(element.textContent);
+                                        });
+                                    } catch (error) {
+                                        prettyConsole(chalk.red(error.message))
+                                    }
+
+                                    await sleep(5000)
+
+                                    if (checkCommand === 5) {
+                                        prettyConsole(chalk.yellow(`Still Claiming ${chalk.yellow('$HOT🔥')}`))
+                                    }
+
+
+                                    tryMakeSure++
+                                } else {
+                                    prettyConsole(chalk.green(`Claim ${chalk.yellow('$HOT🔥')} Successfully!`))
+                                    prettyConsole(chalk.green(`Update Balance\t:${balanceAfter} ${chalk.yellow('$HOT🔥')}`))
+                                    makeSure = true
+                                    claimed = true
+                                }
+                            } else {
+                                // Tweak if not claimed with clicking boost
+                                prettyConsole(chalk.red(`Claiming ${chalk.yellow('$HOT🔥')} So Take Long Time, Tweaking`))
+
+                                // Click Boost
+                                const clickBoost = async (x) => {
+                                    await iframe.waitForSelector('#root > div > div > div:nth-child(3) > div > div:nth-child(4) > div > div:nth-child(3)');
+                                    account = await iframe.evaluate(() => {
+                                        document.querySelector('#root > div > div > div:nth-child(3) > div > div:nth-child(4) > div > div:nth-child(3)').click();
+                                    })
+                                }
+
+                                await checkCommand(clickBoost, x, 'Click Boost')
+
+                                await sleep(3000)
+
+                                // Click Back
+                                const clickBack = async () => {
+                                    await page.waitForSelector('.btn-icon.popup-close');
+                                    await page.click('.btn-icon.popup-close');
+                                }
+
+                                await checkCommand(clickBack, x, 'Click Back')
+
+                                prettyConsole(chalk.red(`Try To Re-Claim ${chalk.yellow('$HOT🔥')}`))
+                                makeSure = true
+
+                                if (tweak) {
+                                    claimed = true
+                                }
+                                
+                                tweak = true
+                            }
+                        } while (makeSure === false)
                     } while (claimed === false)
                 } else {
                     prettyConsole(chalk.yellow(`You Can Claim $HOT🔥 If Storage >= ${threshold}% `))
