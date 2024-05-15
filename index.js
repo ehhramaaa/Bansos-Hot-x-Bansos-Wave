@@ -367,7 +367,7 @@ const upgradeBoat = async (iframe, balance, x) => {
     await sleep(3000)
 
 
-    if (price < 200) {
+    if (price < 100) {
         if (balance >= (price * 2)) {
             // Click Upgrade
             const clickUpgradeBoat = async () => {
