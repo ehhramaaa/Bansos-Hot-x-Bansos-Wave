@@ -516,7 +516,7 @@ async function main() {
 
         await killApps()
 
-        await sleep(7000)
+        await sleep(5000)
 
         const ip = await checkIp()
         prettyConsole(chalk.yellow(`Current IP : ${ip}`))
@@ -656,6 +656,7 @@ async function main() {
                 // Handle iframe
                 const iframeSelector = '.payment-verification';
                 let iframeElementHandle
+                let iframe
                 const handleFrame = async (x) => {
                     await page.waitForSelector(iframeSelector)
                     iframeElementHandle = await page.$(iframeSelector);
@@ -665,7 +666,15 @@ async function main() {
 
                 await sleep(3000)
 
-                const iframe = await iframeElementHandle.contentFrame();
+                try {
+                    iframe = await iframeElementHandle.contentFrame();
+                } catch (error) {
+                    prettyConsole(chalk.red(`Error:\t:${error.message}`))
+                    await killApps()
+                    await rest()
+                    continue mainLoop;
+                }
+
 
                 let account
 
@@ -1125,7 +1134,9 @@ async function main() {
                     }
                 }
 
+                await sleep(2000)
                 await upgradeBoat(iframe, balanceWave, x)
+                await sleep(2000)
                 await upgradeAquaCat(iframe, balanceWave, x)
             }
 
