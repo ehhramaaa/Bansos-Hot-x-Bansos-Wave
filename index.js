@@ -362,7 +362,7 @@ const upgradeBoat = async (iframe, balance, x) => {
         return false
     }
 
-    prettyConsole(chalk.green(`Price Upgrade Boat :${price} ${chalk.cyan('Wave💎')}`))
+    prettyConsole(chalk.green(`Price Upgrade Boat :${price} ${chalk.cyan('$OCEAN💎')}`))
 
     await sleep(3000)
 
@@ -451,7 +451,7 @@ const upgradeAquaCat = async (iframe, balance, x) => {
         return false
     }
 
-    prettyConsole(chalk.green(`Price Upgrade Aqua Cat :${price} ${chalk.cyan('Wave💎')}`))
+    prettyConsole(chalk.green(`Price Upgrade Aqua Cat :${price} ${chalk.cyan('$OCEAN💎')}`))
 
     await sleep(3000)
 
@@ -505,6 +505,8 @@ const upgradeAquaCat = async (iframe, balance, x) => {
 
 async function main() {
     console.log(chalk.cyan(`\n<==================================[${moment().format('HH:mm:ss DD-MM-YYYY')}]==================================>`))
+    let totalBalanceHot = 0
+    let totalBalanceWave = 0
 
     const minute = Math.floor(Math.random() * (15 - 1 + 1)) + 1
     const ovpnConfig = await ovpnReadConfig(folderPath)
@@ -720,6 +722,7 @@ async function main() {
                 await checkCommand(checkBalance, x, 'Check Balance')
 
                 prettyConsole(chalk.green(`Balance\t:${balance} ${chalk.yellow('$HOT🔥')}`))
+                totalBalanceHot = totalBalanceHot + balance
 
                 let storage = 0
                 const threshold = 93;
@@ -890,7 +893,7 @@ async function main() {
             const waveWallet = true;
             if (waveWallet && x !== 21) {
                 const wavePage = await browser.newPage()
-                console.log(chalk.cyan(`\n[Bansos ${chalk.cyan('Wave💎')}]`))
+                console.log(chalk.cyan(`\n[Bansos ${chalk.cyan('$OCEAN💎')}]`))
                 // Goto Link
                 const gotoLink = async () => {
                     await wavePage.goto('https://web.telegram.org/k/#@waveonsuibot', { waitUntil: ['networkidle2', 'domcontentloaded'] });
@@ -993,7 +996,9 @@ async function main() {
 
                 await sleep(3000)
 
-                prettyConsole(chalk.green(`Balance\t:${balanceWave} ${chalk.cyan('Wave💎')}`))
+                prettyConsole(chalk.green(`Balance\t:${balanceWave} ${chalk.cyan('$OCEAN💎')}`))
+                
+                totalBalanceWave = totalBalanceWave + balanceWave
 
                 let speed
 
@@ -1013,7 +1018,7 @@ async function main() {
                     continue mainLoop
                 }
 
-                prettyConsole(chalk.green(`Speed\t:${speed} Wave💎/Hours`))
+                prettyConsole(chalk.green(`Speed\t:${speed} $OCEAN💎/Hours`))
 
                 let storage
 
@@ -1075,14 +1080,14 @@ async function main() {
                             });
                         }
 
-                        isContinue = await checkCommand(claimWaveButton, x, 'Claim Wave💎')
+                        isContinue = await checkCommand(claimWaveButton, x, 'Claim $OCEAN💎')
 
                         if (!isContinue) {
                             await rest()
                             continue mainLoop
                         }
 
-                        prettyConsole(chalk.green(`Claiming ${chalk.cyan('Wave💎')}......`))
+                        prettyConsole(chalk.green(`Claiming ${chalk.cyan('$OCEAN💎')}......`))
 
                         let checkClaim
 
@@ -1092,7 +1097,7 @@ async function main() {
                                 await iframe.waitForSelector('#section-transaction > div > div > div:nth-child(3) > div > div > div > div:nth-child(2) > span');
                                 claimed = true;
                             } catch (error) {
-                                prettyConsole(chalk.yellow(`Still Claiming ${chalk.cyan('Wave💎')}......`))
+                                prettyConsole(chalk.yellow(`Still Claiming ${chalk.cyan('$OCEAN💎')}......`))
                                 checkClaim++
                             }
                         } while (checkClaim < 3 && !claimed)
@@ -1101,7 +1106,7 @@ async function main() {
 
                         // Tweaking
                         if (!claimed) {
-                            prettyConsole(chalk.yellow(`Claiming ${chalk.cyan('Wave💎')} Failed!, Tweaking`))
+                            prettyConsole(chalk.yellow(`Claiming ${chalk.cyan('$OCEAN💎')} Failed!, Tweaking`))
 
                             // Click Back
                             const clickBack = async () => {
@@ -1128,7 +1133,7 @@ async function main() {
                     } while (!claimed && reclaim < 3)
 
                     if (claimed) {
-                        prettyConsole(chalk.green(`Successfully Claim ${chalk.cyan('Wave💎')}`))
+                        prettyConsole(chalk.green(`Successfully Claim ${chalk.cyan('$OCEAN💎')}`))
                     } else {
                         prettyConsole(chalk.red("Claiming And Tweaking Failed!"))
                     }
@@ -1145,6 +1150,8 @@ async function main() {
         }
     }
 
+    prettyConsole(chalk.green(`Total Balance ${chalk.yellow("$HOT🔥")}:${totalBalanceHot} ${chalk.yellow("$HOT🔥")}`))
+    prettyConsole(chalk.green(`Total Balance ${chalk.cyan("$OCEAN💎")}:${totalBalanceWave} ${chalk.cyan("$OCEAN💎")}`))
     changeCronSchedule(minute);
 }
 
