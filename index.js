@@ -1039,7 +1039,7 @@ async function main() {
 
                 // Check Claim Button
                 try {
-                    await iframe.waitForSelector('#section-transaction > div.block-data.h-full > div > div.overlay.relative > div > div > div > div.flex.flex-row.items-center.item-2.mt-2.mb-3 > div > div', { timeout: 5000 });
+                    await iframe.waitForSelector('#section-transaction > div.block-data.h-full > div > div.overlay.relative > div > div > div > button', { timeout: 5000 });
                     claim = true
                 } catch (error) {
                     let claimTime
@@ -1071,7 +1071,7 @@ async function main() {
                         // Click Claim Button
                         const claimWaveButton = async () => {
                             await iframe.evaluate(() => {
-                                document.querySelector('#section-transaction > div.block-data.h-full > div > div.overlay.relative > div > div > div > div.flex.flex-row.items-center.item-2.mt-2.mb-3 > div > div').click();
+                                document.querySelector('#section-transaction > div.block-data.h-full > div > div.overlay.relative > div > div > div > button').click();
                             });
                         }
 
