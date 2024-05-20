@@ -1046,9 +1046,9 @@ async function main() {
 
                     // Check Claim Time
                     const checkClaimTime = async (x) => {
-                        await iframe.waitForSelector('#section-transaction > div.block-data.h-full > div > div.overlay.relative > div > div > div > div.ml-2.flex.flex-row.items-center.item.mt-2.mb-3 > span');
+                        await iframe.waitForSelector('#section-transaction > div > div > div:nth-child(3) > div > div > div > div:nth-child(2) > span');
                         claimTime = await iframe.evaluate(() => {
-                            const element = document.querySelector('#section-transaction > div.block-data.h-full > div > div.overlay.relative > div > div > div > div.ml-2.flex.flex-row.items-center.item.mt-2.mb-3 > span');
+                            const element = document.querySelector('#section-transaction > div > div > div:nth-child(3) > div > div > div > div:nth-child(2) > span');
                             return element.textContent
                         });
                     }
@@ -1089,7 +1089,7 @@ async function main() {
                         // Check Status Claim
                         do {
                             try {
-                                await iframe.waitForSelector('#section-transaction > div.block-data.h-full > div > div.overlay.relative > div > div > div > div.ml-2.flex.flex-row.items-center.item.mt-2.mb-3 > span');
+                                await iframe.waitForSelector('#section-transaction > div > div > div:nth-child(3) > div > div > div > div:nth-child(2) > span');
                                 claimed = true;
                             } catch (error) {
                                 prettyConsole(chalk.yellow(`Still Claiming ${chalk.cyan('Wave💎')}......`))
