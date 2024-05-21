@@ -976,6 +976,8 @@ async function main() {
                     continue mainLoop
                 }
 
+                prettyConsole(chalk.green(`Balance Sui\t:${balanceSui} ${chalk.cyan('$SUI')}`))
+
                 await sleep(3000)
 
                 // Click Claim Now
