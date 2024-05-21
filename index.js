@@ -1020,7 +1020,7 @@ async function main() {
 
                 await sleep(3000)
 
-                prettyConsole(chalk.green(`Balance Ocean\t:${balanceWave} ${chalk.cyan('$OCEAN💎')}`))
+                prettyConsole(chalk.green(`Balance Ocean :${balanceWave} ${chalk.cyan('$OCEAN💎')}`))
                 
                 totalBalanceWave = totalBalanceWave + balanceWave
 
