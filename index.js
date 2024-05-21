@@ -977,7 +977,7 @@ async function main() {
                     continue mainLoop
                 }
 
-                prettyConsole(chalk.green(`Balance Sui\t:${balanceSui} ${chalk.cyan('$SUI')}`))
+                prettyConsole(chalk.green(`Balance Sui :${balanceSui} ${chalk.cyan('$SUI')}`))
 
                 totalBalanceSui = totalBalanceSui + balanceSui
 
@@ -1177,6 +1177,7 @@ async function main() {
     console.log(chalk.cyan(`\n<===================================================================================>`))
     prettyConsole(chalk.green(`Total Balance ${chalk.yellow("$HOT🔥")}:${totalBalanceHot} ${chalk.yellow("$HOT🔥")}`))
     prettyConsole(chalk.green(`Total Balance ${chalk.cyan("$OCEAN💎")}:${totalBalanceWave} ${chalk.cyan("$OCEAN💎")}`))
+    prettyConsole(chalk.green(`Total Balance ${chalk.cyan("$SUI")}:${totalBalanceSui} ${chalk.cyan("$SUI")}`))
     changeCronSchedule(minute);
 }
 
