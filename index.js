@@ -553,7 +553,6 @@ async function main() {
             }
         }
 
-
         if (isVpn) {
             // Connect Browser
             if (x === 22) {
@@ -958,6 +957,26 @@ async function main() {
                 await sleep(3000)
 
                 const iframe = await iframeElementHandle.contentFrame();
+
+                let balanceSui
+
+                // Check Balance Sui
+                const checkSui = async () => {
+                    await iframe.waitForSelector('div.portfolio_block > div:nth-child(2) > div > div:nth-child(1) > p.wave_number');
+                    balanceSui = await iframe.evaluate(() => {
+                        const element = document.querySelector('div.portfolio_block > div:nth-child(2) > div > div:nth-child(1) > p.wave_number');
+                        return parseFloat(element.textContent)
+                    });
+                }
+
+                isContinue = await checkCommand(checkSui, x, 'Check Balance Sui')
+
+                if (!isContinue) {
+                    await rest()
+                    continue mainLoop
+                }
+
+                await sleep(3000)
 
                 // Click Claim Now
                 const claimNow = async () => {
