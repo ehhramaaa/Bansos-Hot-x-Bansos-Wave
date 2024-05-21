@@ -504,16 +504,17 @@ const upgradeAquaCat = async (iframe, balance, x) => {
 }
 
 async function main() {
-    console.log(chalk.cyan(`\n<==================================[${moment().format('HH:mm:ss DD-MM-YYYY')}]==================================>`))
+    console.log(chalk.cyan(`\n<====================[${moment().format('HH:mm:ss DD-MM-YYYY')}]====================>`))
     let totalBalanceHot = 0
     let totalBalanceWave = 0
+    let totalBalanceSui = 0
 
     const minute = Math.floor(Math.random() * (15 - 1 + 1)) + 1
     const ovpnConfig = await ovpnReadConfig(folderPath)
 
     mainLoop: for (let x = 0; x <= 22; x++) {
         if (x !== 0) {
-            console.log(chalk.cyan(`\n<===============================================================================================================>`))
+            console.log(chalk.cyan(`\n<===================================================================================>`))
         }
 
         await killApps()
@@ -978,6 +979,8 @@ async function main() {
 
                 prettyConsole(chalk.green(`Balance Sui\t:${balanceSui} ${chalk.cyan('$SUI')}`))
 
+                totalBalanceSui = totalBalanceSui + balanceSui
+
                 await sleep(3000)
 
                 // Click Claim Now
@@ -1017,7 +1020,7 @@ async function main() {
 
                 await sleep(3000)
 
-                prettyConsole(chalk.green(`Balance\t:${balanceWave} ${chalk.cyan('$OCEAN💎')}`))
+                prettyConsole(chalk.green(`Balance Ocean\t:${balanceWave} ${chalk.cyan('$OCEAN💎')}`))
                 
                 totalBalanceWave = totalBalanceWave + balanceWave
 
@@ -1171,6 +1174,7 @@ async function main() {
         }
     }
 
+    console.log(chalk.cyan(`\n<===================================================================================>`))
     prettyConsole(chalk.green(`Total Balance ${chalk.yellow("$HOT🔥")}:${totalBalanceHot} ${chalk.yellow("$HOT🔥")}`))
     prettyConsole(chalk.green(`Total Balance ${chalk.cyan("$OCEAN💎")}:${totalBalanceWave} ${chalk.cyan("$OCEAN💎")}`))
     changeCronSchedule(minute);
