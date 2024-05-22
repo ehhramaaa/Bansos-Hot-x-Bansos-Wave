@@ -985,9 +985,9 @@ async function main() {
 
                 // Click Claim Now
                 const claimNow = async () => {
-                    await iframe.waitForSelector('#section-home > div > div > div.block-claim.flex.flex-row.relative.z-0 > div.item-1 > div._item-1_2 > div.ml-auto.mt-3 > button');
+                    await iframe.waitForSelector('#section-home > div > div > div:nth-child(3) > div > div > div > div:nth-child(2) > div:nth-child(2) > div:nth-child(2) > button');
                     await iframe.evaluate(() => {
-                        document.querySelector('#section-home > div > div > div.block-claim.flex.flex-row.relative.z-0 > div.item-1 > div._item-1_2 > div.ml-auto.mt-3 > button').click();
+                        document.querySelector('#section-home > div > div > div:nth-child(3) > div > div > div > div:nth-child(2) > div:nth-child(2) > div:nth-child(2) > button').click();
                     });
                 }
 
