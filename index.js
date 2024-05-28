@@ -756,9 +756,9 @@ async function main() {
                 if (storage >= threshold) {
                     // Click Gas
                     const clickGas = async (x) => {
-                        await iframe.waitForSelector('#root > div > div > div:nth-child(3) > div > div:nth-child(4) > div > div:nth-child(1)');
+                        await iframe.waitForSelector('#root > div > div > div:nth-child(4) > div > div:nth-child(4) > div > div:nth-child(1)');
                         await iframe.evaluate(() => {
-                            document.querySelector('#root > div > div > div:nth-child(3) > div > div:nth-child(4) > div > div:nth-child(1)').click();
+                            document.querySelector('#root > div > div > div:nth-child(4) > div > div:nth-child(4) > div > div:nth-child(1)').click();
                         });
                     }
 
@@ -811,7 +811,7 @@ async function main() {
                     do {
                         // Click Claim
                         const clickClaim = async (x) => {
-                            const claimSelector = '#root > div > div > div:nth-child(3) > div > div:nth-child(3) > div > div:nth-child(2) > div:nth-child(3) > button'
+                            const claimSelector = '#root > div > div > div:nth-child(4) > div > div:nth-child(3) > div > div:nth-child(2) > div:nth-child(3) > button'
                             await iframe.waitForSelector(claimSelector);
                             await iframe.evaluate((selector) => {
                                 document.querySelector(selector).click();
@@ -833,7 +833,7 @@ async function main() {
                                     try {
                                         // Check balance for makesure is claimed
                                         balanceAfter = await iframe.evaluate(() => {
-                                            const element = document.querySelector('#root > div > div > div:nth-child(3) > div > div:nth-child(2) > div:nth-child(4) > p:nth-child(3)');
+                                            const element = document.querySelector('#root > div > div > div:nth-child(4) > div > div:nth-child(2) > div:nth-child(4) > p:nth-child(3)');
                                             return parseFloat(element.textContent);
                                         });
                                     } catch (error) {
