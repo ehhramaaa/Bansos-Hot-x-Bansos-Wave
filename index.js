@@ -799,6 +799,8 @@ async function main() {
 
 
                                     tryMakeSure++
+
+                                    await sleep(10000)
                                 } else {
                                     prettyConsole(chalk.green(`Claim ${chalk.yellow('$HOT🔥')} Successfully!`))
                                     prettyConsole(chalk.green(`Update Balance\t:${balanceAfter} ${chalk.yellow('$HOT🔥')}`))
