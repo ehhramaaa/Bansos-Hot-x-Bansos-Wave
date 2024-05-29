@@ -753,58 +753,9 @@ async function main() {
 
                 await checkCommand(clickStorage, x, 'Click Storage')
 
+                await sleep(3000)
+
                 if (storage >= threshold) {
-                    // Click Gas
-                    const clickGas = async (x) => {
-                        await iframe.waitForSelector('#root > div > div > div:nth-child(4) > div > div:nth-child(4) > div > div:nth-child(1)');
-                        await iframe.evaluate(() => {
-                            document.querySelector('#root > div > div > div:nth-child(4) > div > div:nth-child(4) > div > div:nth-child(1)').click();
-                        });
-                    }
-
-                    await checkCommand(clickGas, x, 'Click Gas')
-
-                    // Click Tab Gas
-                    const tabGas = async (x) => {
-                        await iframe.waitForSelector('#root > div > div > div:nth-child(4) > div:nth-child(1) > div > div:nth-child(3)');
-                        await iframe.evaluate(() => {
-                            document.querySelector('#root > div > div > div:nth-child(4) > div:nth-child(1) > div > div:nth-child(3)').click();
-                        });
-                    }
-
-                    await checkCommand(tabGas, x, 'Click Tab Gas')
-
-                    // Wait For Counting Gas Amount
-                    await sleep(10000)
-
-                    let gasFree
-
-                    // Check Gas Free Amount
-                    const checkGas = async (x) => {
-                        await iframe.waitForSelector('#root > div > div > div:nth-child(4) > div:nth-child(2) > div > div:nth-child(2) > div:nth-child(1) > h3');
-                        gasFree = await iframe.evaluate(() => {
-                            const element = document.querySelector('#root > div > div > div:nth-child(4) > div:nth-child(2) > div > div:nth-child(2) > div:nth-child(1) > h3');
-                            return parseFloat(element.textContent)
-                        });
-                    }
-
-                    await checkCommand(checkGas, x, 'Check Gas Free Amount')
-
-                    prettyConsole(chalk.green(`Gas Free\t:${gasFree}`))
-
-                    // Click Back
-                    const clickBack = async (x) => {
-                        await page.waitForSelector('.popup-close');
-                        await page.click('.popup-close');
-                    }
-
-                    await checkCommand(clickBack, x, 'Click Back')
-
-                    // Click Storage
-                    await checkCommand(clickStorage, x, 'Click Storage')
-
-                    await sleep(3000)
-
                     let claimed = false
 
                     // Claim $HOT🔥
