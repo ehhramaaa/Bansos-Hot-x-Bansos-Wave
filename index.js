@@ -957,9 +957,9 @@ async function main() {
 
                 // Check Balance
                 const checkBalance = async (x) => {
-                    await iframe.waitForSelector('#section-transaction > div.block-data.h-full > div > div.flex.item-bl-1.flex-row.items-center > div.left.relative > p');
+                    await iframe.waitForSelector('#section-transaction > div > div > div > button > p');
                     balanceWave = await iframe.evaluate(() => {
-                        const element = document.querySelector('#section-transaction > div.block-data.h-full > div > div.flex.item-bl-1.flex-row.items-center > div.left.relative > p');
+                        const element = document.querySelector('#section-transaction > div > div > div > button > p');
                         return parseFloat(element.textContent)
                     });
                 }
